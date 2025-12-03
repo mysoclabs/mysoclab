@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 217 33% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217 33% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 189 97% 55%;
+    --primary-foreground: 222 47% 4%;
+
+    --secondary: 217 33% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 12%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 189 97% 55%;
+    --accent-foreground: 222 47% 4%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 15%;
+    --input: 217 33% 15%;
+    --ring: 189 97% 55%;
+
+    --radius: 0.5rem;
+    
+    /* Custom variables */
+    --cyber-glow: 189 97% 55%;
+    --cyber-grid: 189 50% 25%;
+    --gradient-cyber: linear-gradient(135deg, hsl(189 97% 55% / 0.1), hsl(217 33% 8%));
+    --shadow-cyber: 0 0 30px hsl(189 97% 55% / 0.3);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Sidebar variables */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    
+    /* Red Eagle theme base variables */
+    --eagle-bg: 0 0% 4%;
+    --eagle-cream: 30 20% 90%;
+    --eagle-text-bright: 0 0% 98%;
+    --eagle-text-muted: 0 0% 70%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 40% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 217 33% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217 33% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 189 97% 60%;
+    --primary-foreground: 220 40% 8%;
+
+    --secondary: 217 33% 15%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 15%;
+    --muted-foreground: 215 20% 70%;
+
+    --accent: 189 97% 60%;
+    --accent-foreground: 220 40% 8%;
+
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 189 97% 60%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Display font for headings / key UI text */
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  /* Custom Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.6); }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse-red {
+    0%, 100% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(220, 38, 38, 0.6); }
+  }
+
+  /* Red Eagle Design Tokens */
+  /* Red Eagle Theme - Consolidated Variables */
+  .red-eagle-theme {
+    /* Background Colors */
+    --eagle-bg: 0 0% 4%;
+    --eagle-surface: 0 0% 8%;
+    --eagle-surface-elevated: 0 0% 12%;
+    
+    /* Brand Colors */
+    --eagle-red: 0 83% 47%;
+    --eagle-red-dark: 0 83% 42%;
+    --eagle-cream: 30 20% 90%;
+    --eagle-cream-dark: 30 20% 75%;
+    
+    /* Text Colors */
+    --eagle-text: 0 0% 90%;
+    --eagle-text-bright: 0 0% 100%;
+    --eagle-text-muted: 0 0% 65%;
+    
+    /* UI Elements */
+    --eagle-border: 0 0% 20%;
+    --eagle-ring: 0 83% 47%;
+    
+    /* Apply the theme to root variables when using red-eagle-theme class */
+    --background: var(--eagle-bg);
+    --foreground: var(--eagle-text);
+    --card: var(--eagle-surface);
+    --card-foreground: var(--eagle-text);
+    --popover: var(--eagle-surface);
+    --popover-foreground: var(--eagle-text);
+    --primary: var(--eagle-red);
+    --primary-foreground: var(--eagle-text-bright);
+    --secondary: var(--eagle-surface-elevated);
+    --secondary-foreground: var(--eagle-text);
+    --muted: var(--eagle-surface-elevated);
+    --muted-foreground: var(--eagle-text-muted);
+    --accent: var(--eagle-red);
+    --accent-foreground: var(--eagle-text-bright);
+    --border: var(--eagle-border);
+    --input: var(--eagle-border);
+    --ring: var(--eagle-ring);
+  }
+}
