@@ -1,10 +1,11 @@
-import { getDb } from "../lib/mongo.js";
+import "dotenv/config";
+import express from "express";
+import { getDb } from "../server/mongo.js";
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+const app = express();
+app.use(express.json());
 
+app.post(async (req, res) => {
   try {
     const {
       fullName,
@@ -15,7 +16,7 @@ export default async function handler(req, res) {
       subject,
       message,
       gdprConsent,
-    } = req.body ?? {};
+    } = req.body;
 
     if (!email) {
       return res.status(400).json({ error: "Email required" });
@@ -26,9 +27,7 @@ export default async function handler(req, res) {
     }
 
     const db = await getDb();
-    const collection = db.collection("contact_messages");
-
-    await collection.insertOne({
+    await db.collection("contact_messages").insertOne({
       fullName,
       email,
       phoneCountryCode,
@@ -36,13 +35,14 @@ export default async function handler(req, res) {
       company,
       subject,
       message,
-      gdprConsent,
       createdAt: new Date(),
     });
 
     return res.status(201).json({ ok: true });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: err.message });
   }
-}
+});
+
+export default app;
