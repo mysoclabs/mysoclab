@@ -5,7 +5,7 @@ import { Shield, ArrowRight, Play } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export const Hero = () => {
-  const words = ["Innovative", "Advanced", "Next-Gen", "Intelligent", "Cutting-Edge"];
+  const words = ["Next-Gen"];
   const [currentWord, setCurrentWord] = useState(0);
   const [typedDescription, setTypedDescription] = useState("");
 

@@ -18,12 +18,11 @@ export const About = () => {
             </h2>
             <p className="text-lg text-muted-foreground mb-6">
               MySocLabs is dedicated to safeguarding your data in an ever-evolving digital world. 
-              Our mission is to preserve our digital way of life by countering cyber threats with 
+              Our mission is to preserve your digital way of life by countering cyber threats with 
               innovative solutions and expert knowledge.
             </p>
             <p className="text-lg text-muted-foreground mb-8">
-              We proudly secure hundreds of businesses and their clients, delivering highly 
-              effective cybersecurity across cloud environments, networks, and mobile devices.
+             We are Excel in providing differentiated approach to cybersecurity operations
             </p>
             <div className="space-y-3">
               {features.map((feature, index) => (

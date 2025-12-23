@@ -10,6 +10,10 @@ import ContactPage from "./pages/ContactPage";
 import SocAiTool from "./pages/SocAiTool";
 import TrialSignup from "./pages/TrialSignup";
 import NotFound from "./pages/NotFound";
+import SocAiTool from "@/components/SocAiTool";
+import { Contact } from "@/pages/ContactPage";
+import TrailSignup from "@/pages/TrialSignup";
+
 
 const queryClient = new QueryClient();
 
@@ -28,6 +32,8 @@ const App = () => (
           <Route path="/trial-signup" element={<TrialSignup />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/trial-signup" element={<TrailSignup />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
