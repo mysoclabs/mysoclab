@@ -1,8 +1,6 @@
-import "dotenv/config";
-import { getDb } from "../lib/mongo.js"; // adjust path if needed
+import { getDb } from "../lib/mongo.js";
 
 export default async function handler(req, res) {
-  // Allow only POST
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -36,13 +34,12 @@ export default async function handler(req, res) {
       company,
       subject,
       message,
-      gdprConsent,
       createdAt: new Date(),
     });
 
     return res.status(201).json({ ok: true });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 }
