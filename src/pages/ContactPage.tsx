@@ -10,8 +10,10 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Clock, Mail, MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ContactPage = () => {
+  const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneCountryCode, setPhoneCountryCode] = useState<string>("+91");
@@ -24,9 +26,9 @@ const ContactPage = () => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+
   const canSubmit = useMemo(() => {
     if (!email.trim()) return false;
-    if (!gdprConsent) return false;
     return true;
   }, [email, gdprConsent]);
 
@@ -61,7 +63,8 @@ const ContactPage = () => {
         throw new Error(text || "Failed to submit");
       }
 
-      setSubmitSuccess(true);
+      // Navigate to the success page route defined in App.tsx
+      navigate("/success");
       setFullName("");
       setEmail("");
       setPhoneCountryCode("+91");

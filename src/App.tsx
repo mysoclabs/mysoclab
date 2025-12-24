@@ -13,6 +13,8 @@ import ContactPage from "./pages/ContactPage";
 import SocAiTool from "./pages/SocAiTool";
 import TrialSignup from "./pages/TrialSignup";
 import NotFound from "./pages/NotFound";
+import Success from "./pages/Success";
+
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,7 @@ const App = () => (
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/soc-ai-tool" element={<SocAiTool />} />
           <Route path="/trial-signup" element={<TrialSignup />} />
+          <Route path="/success" element={<Success />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
