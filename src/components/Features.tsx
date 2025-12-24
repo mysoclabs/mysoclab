@@ -1,11 +1,12 @@
 import { ArrowRight, Eye, Bug, Briefcase } from "lucide-react";
 import { Link } from "react-router-dom";
 
+/* -------------------- TYPES -------------------- */
+
 type FeatureCategory = "defense" | "offense" | "advisory";
 
-/**
- * Border glow stays category-based (unchanged)
- */
+/* -------------------- BORDER GLOW -------------------- */
+
 const borderGlow: Record<FeatureCategory, string> = {
   defense:
     "group-hover:shadow-[0_0_0_2px_rgba(59,130,246,0.9),0_0_30px_rgba(59,130,246,0.6)]",
@@ -14,6 +15,8 @@ const borderGlow: Record<FeatureCategory, string> = {
   advisory:
     "group-hover:shadow-[0_0_0_2px_rgba(34,197,94,0.9),0_0_30px_rgba(34,197,94,0.6)]",
 };
+
+/* -------------------- FEATURE DATA -------------------- */
 
 const features = [
   {
@@ -32,18 +35,21 @@ const features = [
   },
   {
     icon: Briefcase,
-    title: "vCISO",
-    desc: "Strategic security leadership without full-time cost.",
+    title: "Virtual CISO (vCISO)",
+    desc: "Strategic security leadership without full-time executive cost.",
     category: "advisory" as FeatureCategory,
     link: "/services#advisory",
   },
 ];
 
+/* -------------------- COMPONENT -------------------- */
+
 export const Features = () => {
   return (
     <section className="py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+
+        {/* HEADER */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Comprehensive{" "}
@@ -55,7 +61,7 @@ export const Features = () => {
           </p>
         </div>
 
-        {/* Cards */}
+        {/* FEATURE CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => {
             const Icon = feature.icon;
@@ -63,7 +69,6 @@ export const Features = () => {
             return (
               <Link to={feature.link} key={index} className="block">
                 <div className="group relative rounded-xl transition-all duration-300">
-                  {/* Card */}
                   <div
                     className={`
                       rounded-xl bg-card/80 backdrop-blur-md
@@ -72,7 +77,7 @@ export const Features = () => {
                       ${borderGlow[feature.category]}
                     `}
                   >
-                    {/* Icon (CYAN ONLY) */}
+                    {/* ICON */}
                     <div className="mb-4">
                       <div
                         className="
@@ -88,12 +93,12 @@ export const Features = () => {
                       </div>
                     </div>
 
-                    {/* Title */}
+                    {/* TITLE */}
                     <h3 className="text-xl font-semibold mb-3">
                       {feature.title}
                     </h3>
 
-                    {/* Description */}
+                    {/* DESCRIPTION */}
                     <p className="text-muted-foreground leading-relaxed">
                       {feature.desc}
                     </p>
@@ -110,9 +115,9 @@ export const Features = () => {
           })}
         </div>
 
-        {/* CTA Button */}
+        {/* EXPLORE ALL CTA */}
         <div className="mt-12 text-center">
-          <Link to="/services">
+          <Link to="/services#all">
             <button className="px-8 py-3 rounded-md border border-primary/40 hover:border-primary hover:bg-primary/10 transition-all">
               Explore All Services →
             </button>

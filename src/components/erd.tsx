@@ -9,7 +9,7 @@ export const ERD = () => {
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
 
           {/* LEFT CONTENT */}
-          <div className="space-y-6">
+          <div className="space-y-6 lg:pl-8 xl:pl-12">
 
             {/* LOGO + NAME */}
             <div className="flex items-center gap-3 group">
@@ -31,23 +31,23 @@ export const ERD = () => {
 
             {/* HEADING */}
             <h2 className="text-4xl font-bold leading-tight md:text-5xl">
-              Intrusion Detection <br />
+              Endpoint Detection <br />
               <span className="text-cyan-400">
-                and Prevention System
+                and Response Platform
               </span>
             </h2>
 
             {/* SUB HEADING */}
             <p className="max-w-xl text-xl text-muted-foreground">
-              The ultimate anti-virus and intrusion detection engine designed
-              to protect modern infrastructure from evolving cyber threats.
+              An advanced endpoint detection and response platform built
+              to secure modern systems against sophisticated cyber attacks.
             </p>
 
             {/* DESCRIPTION */}
             <p className="max-w-lg text-base text-muted-foreground">
-              Red Eagle continuously monitors network activity, detects
-              anomalies in real-time, and prevents malicious intrusions using
-              AI-driven behavioral analysis.
+              Red Eagle continuously monitors endpoint activity, detects
+              suspicious behavior in real time, and responds to threats
+              using AI-driven behavioral and forensic analysis.
             </p>
 
             {/* CTA */}
@@ -82,7 +82,7 @@ export const ERD = () => {
             >
               <img
                 src={logo}
-                alt="Red Eagle IDS"
+                alt="Red Eagle EDR"
                 className="
                   w-52
                   opacity-95
