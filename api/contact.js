@@ -1,11 +1,12 @@
 import "dotenv/config";
-import express from "express";
-import { getDb } from "../server/mongo.js";
+import { getDb } from "../lib/mongo.js"; // adjust path if needed
 
-const app = express();
-app.use(express.json());
+export default async function handler(req, res) {
+  // Allow only POST
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-app.post(async (req, res) => {
   try {
     const {
       fullName,
@@ -35,14 +36,13 @@ app.post(async (req, res) => {
       company,
       subject,
       message,
+      gdprConsent,
       createdAt: new Date(),
     });
 
     return res.status(201).json({ ok: true });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: "Internal server error" });
   }
-});
-
-export default app;
+}
