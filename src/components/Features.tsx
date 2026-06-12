@@ -9,11 +9,11 @@ type FeatureCategory = "defense" | "offense" | "advisory";
 
 const borderGlow: Record<FeatureCategory, string> = {
   defense:
-    "group-hover:shadow-[0_0_0_2px_rgba(59,130,246,0.9),0_0_30px_rgba(59,130,246,0.6)]",
+    "group-hover:shadow-[0_4px_20px_rgba(59,130,246,0.15)] group-hover:border-blue-500/40",
   offense:
-    "group-hover:shadow-[0_0_0_2px_rgba(239,68,68,0.9),0_0_30px_rgba(239,68,68,0.6)]",
+    "group-hover:shadow-[0_4px_20px_rgba(239,68,68,0.15)] group-hover:border-red-500/40",
   advisory:
-    "group-hover:shadow-[0_0_0_2px_rgba(34,197,94,0.9),0_0_30px_rgba(34,197,94,0.6)]",
+    "group-hover:shadow-[0_4px_20px_rgba(34,197,94,0.15)] group-hover:border-green-500/40",
 };
 
 /* -------------------- FEATURE DATA -------------------- */
@@ -46,7 +46,7 @@ const features = [
 
 export const Features = () => {
   return (
-    <section className="py-20 relative">
+    <section className="py-10 lg:py-20 relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* HEADER */}
@@ -86,7 +86,7 @@ export const Features = () => {
                           border border-cyan-400/30
                           flex items-center justify-center
                           transition-all duration-300
-                          group-hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]
+                          group-hover:shadow-[0_0_12px_rgba(34,211,238,0.15)]
                         "
                       >
                         <Icon className="w-7 h-7 text-cyan-400" />

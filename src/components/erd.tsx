@@ -68,29 +68,21 @@ export const ERD = () => {
           </div>
 
           {/* RIGHT VISUAL CARD */}
-          <div className="relative flex justify-center group">
+          <div className="relative flex justify-center">
             <div
               className="
                 flex h-[380px] w-[380px]
                 items-center justify-center
                 rounded-2xl border border-cyan-400/30
                 bg-gradient-to-br from-cyan-400/20 to-blue-600/10
-                shadow-[0_0_80px_rgba(0,255,255,0.15)]
-                transition-all duration-500
-                group-hover:shadow-[0_0_120px_rgba(0,255,255,0.25)]
+                transition-transform duration-500 ease-out
+                hover:-translate-y-3
               "
             >
               <img
                 src={logo}
                 alt="Red Eagle EDR"
-                className="
-                  w-52
-                  opacity-95
-                  transition-all duration-500
-                  group-hover:scale-110
-                  group-hover:brightness-125
-                  group-hover:drop-shadow-[0_0_25px_rgba(0,255,255,0.35)]
-                "
+                className="w-52 opacity-90"
               />
             </div>
           </div>
