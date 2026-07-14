@@ -1,4 +1,4 @@
-import { getDb } from "../lib/mongo.js";
+import { getSupabase } from "../lib/supabase.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -25,17 +25,22 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Consent required" });
     }
 
-    const db = await getDb();
-    await db.collection("contact_messages").insertOne({
-      fullName,
+    const supabase = getSupabase();
+    const { error } = await supabase.from("contact_messages").insert({
+      full_name: fullName,
       email,
-      phoneCountryCode,
-      phoneNumber,
+      phone_country_code: phoneCountryCode,
+      phone_number: phoneNumber,
       company,
       subject,
       message,
-      createdAt: new Date(),
+      gdpr_consent: gdprConsent,
     });
+
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
 
     return res.status(201).json({ ok: true });
   } catch (err) {
