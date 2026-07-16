@@ -30,8 +30,9 @@ const ContactPage = () => {
 
   const canSubmit = useMemo(() => {
     if (!email.trim()) return false;
+    if (fullName.trim().length > 0 && !/^[a-zA-Z\s\-'.]{2,100}$/.test(fullName.trim())) return false;
     return true;
-  }, [email, gdprConsent]);
+  }, [email, fullName, gdprConsent]);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -132,6 +133,10 @@ const ContactPage = () => {
                               value={fullName}
                               onChange={(e) => setFullName(e.target.value)}
                               autoComplete="name"
+                              pattern="[a-zA-Z\s\-'.]{2,100}"
+                              maxLength={100}
+                              required
+                              placeholder="John Doe"
                               className="bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 h-11 rounded-xl"
                             />
                           </div>
@@ -143,6 +148,8 @@ const ContactPage = () => {
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
                               autoComplete="email"
+                              required
+                              placeholder="you@company.com"
                               className="bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 h-11 rounded-xl"
                             />
                           </div>
@@ -170,6 +177,8 @@ const ContactPage = () => {
                               onChange={(e) => setPhoneNumber(e.target.value)}
                               placeholder="Mobile number"
                               autoComplete="tel"
+                              pattern="[\d\s\-()]{4,20}"
+                              maxLength={20}
                               className="bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 h-11 rounded-xl"
                             />
                           </div>
@@ -184,6 +193,8 @@ const ContactPage = () => {
                               value={company}
                               onChange={(e) => setCompany(e.target.value)}
                               autoComplete="organization"
+                              maxLength={100}
+                              placeholder="Acme Corp"
                               className="bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 h-11 rounded-xl"
                             />
                           </div>
@@ -211,6 +222,7 @@ const ContactPage = () => {
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder="Your message..."
+                            maxLength={2000}
                             className="min-h-40 bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 rounded-xl"
                           />
                         </div>
