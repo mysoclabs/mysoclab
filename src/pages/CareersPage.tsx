@@ -120,34 +120,37 @@ export default function CareersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b111e] text-foreground flex flex-col font-sans">
+    <div className="min-h-screen bg-[#08080A] text-foreground flex flex-col font-sans">
       <Navigation />
 
       {/* 1. HERO BANNER & SEARCH ROLES (Merged) */}
-      <section className="relative pt-20 pb-12 overflow-hidden border-b border-primary/10 bg-gradient-to-b from-[#0f172a]/20 via-[#0b111e] to-[#0b111e]">
+      <section className="relative overflow-hidden border-b border-white/10 bg-gradient-to-b from-white/[0.035] via-[#08080A] to-[#08080A] pt-20 pb-16">
         {/* Background Cyber Grid */}
         <div
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          className="absolute inset-0 opacity-[0.035] pointer-events-none"
           style={{
             backgroundImage:
               "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
             backgroundSize: "50px 50px",
+            maskImage: "radial-gradient(ellipse at 50% 20%, black 10%, transparent 78%)",
+            WebkitMaskImage: "radial-gradient(ellipse at 50% 20%, black 10%, transparent 78%)",
           }}
         />
+        <div className="pointer-events-none absolute left-1/2 top-[-30%] h-[560px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,hsl(var(--brand)/0.16),transparent_68%)] blur-2xl" />
 
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-3"
+            className="space-y-5"
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary uppercase tracking-widest">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand/10 border border-brand/25 text-xs font-semibold text-brand-bright uppercase tracking-widest">
               MySocLabs Careers
             </span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-[1.1]">
               Work at the Heart of <br />
-              <span className="bg-gradient-to-r from-primary via-cyan-400 to-cyan-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-brand-soft via-brand-bright to-brand bg-clip-text text-transparent">
                 Digital Defense
               </span>
             </h1>
@@ -159,7 +162,7 @@ export default function CareersPage() {
           <div className="flex flex-col items-center gap-6 max-w-xl mx-auto">
             <Link to="/open-roles">
               <Button
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 text-base rounded-xl shadow transition-all duration-300"
+                className="rounded-xl bg-gradient-to-b from-brand-bright to-brand px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-20px_hsl(var(--brand)/0.95)] transition-all duration-300 hover:brightness-110"
               >
                 Search Open Roles
               </Button>
@@ -169,14 +172,16 @@ export default function CareersPage() {
       </section>
 
       {/* 4. BENEFITS & CULTURE */}
-      <section className="py-24 bg-card/10 border-y border-border/40">
+      <section className="py-24 bg-white/[0.012] border-y border-white/10">
         <div className="container mx-auto px-6 max-w-6xl">
-          <div className="text-center mb-16">
-            <span className="text-xs uppercase text-primary tracking-widest font-bold block">Company Perks</span>
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <span className="section-eyebrow is-centered justify-center mb-4">
+              Company Perks
+            </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mt-1">
-              Why Join <span className="text-primary">MySocLabs</span>?
+              Why Join <span className="text-brand-bright">MySocLabs</span>?
             </h2>
-            <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">
               Our workspace is engineered to remove operational stress and focus on pure, intellectual growth in digital protection.
             </p>
           </div>
@@ -190,7 +195,7 @@ export default function CareersPage() {
                   className={`flex flex-col md:flex-row gap-8 md:gap-16 items-center ${isEven ? "" : "md:flex-row-reverse"}`}
                 >
                   {/* Image container */}
-                  <div className="w-full md:w-1/2 aspect-[4/3] rounded-3xl bg-card/45 border border-border/40 flex items-center justify-center text-xs text-muted-foreground/60 transition-all duration-300 hover:border-primary/25 relative overflow-hidden shadow-lg flex-shrink-0">
+                  <div className="group relative aspect-[4/3] w-full flex-shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-[0_35px_70px_-45px_rgba(0,0,0,1)] transition-all duration-300 hover:border-brand/35 md:w-1/2">
                     {benefit.image ? (
                       <img 
                         src={benefit.image} 
@@ -199,10 +204,11 @@ export default function CareersPage() {
                       />
                     ) : (
                       <>
-                        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-cyan-500/5 pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-brand/10 via-transparent to-transparent pointer-events-none" />
                         <span className="font-semibold uppercase tracking-wider text-[11px] text-muted-foreground/50">[ Image Space ]</span>
                       </>
                     )}
+                    <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5" />
                   </div>
 
                   {/* Matter/Text space */}
@@ -241,19 +247,19 @@ export default function CareersPage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: "spring", duration: 0.5 }}
-              className="relative w-full max-w-xl bg-card border border-border/80 rounded-2xl shadow-2xl overflow-hidden z-10"
+              className="relative w-full max-w-xl bg-[#0B0B0D] border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-10"
             >
               {/* Header bar */}
-              <div className="bg-secondary/40 px-6 py-5 border-b border-border/50 flex items-center justify-between">
+              <div className="bg-white/[0.03] px-6 py-5 border-b border-white/10 flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary">Job Application</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-brand-bright">Job Application</span>
                   <h3 className="text-lg font-bold text-foreground mt-0.5">
                     {applyingJob.title}
                   </h3>
                 </div>
                 <button
                   onClick={() => setApplyingJob(null)}
-                  className="p-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
+                  className="p-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -263,13 +269,13 @@ export default function CareersPage() {
               <form onSubmit={handleFormSubmit} className="p-6 space-y-5">
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
-                    Full Name <span className="text-primary">*</span>
+                    Full Name <span className="text-brand-bright">*</span>
                   </label>
                   <input
                     type="text"
                     required
                     placeholder="Enter your name"
-                    className="w-full bg-[#131b2e] border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+                    className="w-full bg-white/[0.04] border border-white/10 rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-brand/60 focus:border-brand/60"
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
                   />
@@ -278,26 +284,26 @@ export default function CareersPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
-                      Email Address <span className="text-primary">*</span>
+                      Email Address <span className="text-brand-bright">*</span>
                     </label>
                     <input
                       type="email"
                       required
                       placeholder="name@example.com"
-                      className="w-full bg-[#131b2e] border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+                      className="w-full bg-white/[0.04] border border-white/10 rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-brand/60 focus:border-brand/60"
                       value={formEmail}
                       onChange={(e) => setFormEmail(e.target.value)}
                     />
                   </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
-                      Phone Number <span className="text-primary">*</span>
+                      Phone Number <span className="text-brand-bright">*</span>
                     </label>
                     <input
                       type="tel"
                       required
                       placeholder="+91 XXXXX XXXXX"
-                      className="w-full bg-[#131b2e] border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+                      className="w-full bg-white/[0.04] border border-white/10 rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-brand/60 focus:border-brand/60"
                       value={formPhone}
                       onChange={(e) => setFormPhone(e.target.value)}
                     />
@@ -310,7 +316,7 @@ export default function CareersPage() {
                       Experience level
                     </label>
                     <select
-                      className="w-full bg-[#131b2e] border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+                      className="w-full bg-white/[0.04] border border-white/10 rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-brand/60 focus:border-brand/60"
                       value={formExp}
                       onChange={(e) => setFormExp(e.target.value)}
                     >
@@ -322,9 +328,9 @@ export default function CareersPage() {
                   </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-1">
-                      Attach Resume <span className="text-primary">*</span>
+                      Attach Resume <span className="text-brand-bright">*</span>
                     </label>
-                    <div className="relative w-full bg-[#131b2e] border border-border border-dashed rounded-lg py-2.5 px-3 flex items-center justify-between text-sm text-muted-foreground cursor-pointer hover:border-primary/50 transition-colors">
+                    <div className="relative w-full bg-white/[0.04] border border-white/10 border-dashed rounded-lg py-2.5 px-3 flex items-center justify-between text-sm text-muted-foreground cursor-pointer hover:border-brand/50 transition-colors">
                       <span className="truncate max-w-[170px]">
                         {formFile ? formFile.name : "Select PDF / Word file"}
                       </span>
@@ -339,7 +345,7 @@ export default function CareersPage() {
                           }
                         }}
                       />
-                      <FileText className="w-4 h-4 text-primary flex-shrink-0" />
+                      <FileText className="w-4 h-4 text-brand-bright flex-shrink-0" />
                     </div>
                   </div>
                 </div>
@@ -351,17 +357,17 @@ export default function CareersPage() {
                   <textarea
                     rows={3}
                     placeholder="Briefly tell us why you are a fit for MySocLabs..."
-                    className="w-full bg-[#131b2e] border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary resize-none"
+                    className="w-full bg-white/[0.04] border border-white/10 rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-brand/60 focus:border-brand/60 resize-none"
                     value={formCover}
                     onChange={(e) => setFormCover(e.target.value)}
                   />
                 </div>
 
-                <div className="flex gap-4 pt-2 border-t border-border/40">
+                <div className="flex gap-4 pt-2 border-t border-white/10">
                   <Button
                     type="button"
                     variant="outline"
-                    className="w-1/3"
+                    className="w-1/3 border-white/15 bg-transparent text-foreground hover:bg-white/[0.06] hover:text-foreground"
                     onClick={() => setApplyingJob(null)}
                     disabled={isSubmitting}
                   >
@@ -369,7 +375,7 @@ export default function CareersPage() {
                   </Button>
                   <Button
                     type="submit"
-                    className="w-2/3 bg-primary hover:bg-primary/95 text-primary-foreground font-bold"
+                    className="w-2/3 bg-gradient-to-b from-brand-bright to-brand text-white font-bold hover:brightness-110"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Uploading Profile..." : "Submit Application"}

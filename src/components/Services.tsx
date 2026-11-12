@@ -156,63 +156,53 @@ export default function Services() {
   };
 
   return (
-    <section className="py-20 bg-[#0a0f1d] text-slate-100 font-sans relative overflow-hidden">
+    <section className="relative overflow-hidden bg-[#08080A] py-20 text-foreground font-sans">
       {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="pointer-events-none absolute inset-0 grid-veil opacity-40" />
+      <div className="pointer-events-none absolute top-0 right-0 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.14),transparent_68%)] blur-2xl" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.07),transparent_70%)] blur-2xl" />
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        
         {/* HEADER */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest block mb-3">
+        <div className="text-center mb-14 max-w-3xl mx-auto">
+          <span className="section-eyebrow is-centered justify-center mb-4">
             Our Services
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-white">
             Comprehensive Security Services
           </h1>
-          <p className="text-lg text-slate-400 font-light">
+          <p className="text-lg text-slate-400 font-light leading-relaxed">
             Protecting your digital future with defensive, offensive, and advisory solutions aligned to your business risk.
           </p>
         </div>
 
         {/* TOP CATEGORY PILLS */}
-        <div className="flex justify-center gap-4 mb-16">
-          <button
-            onClick={() => handleCategoryChange("defense")}
-            className={`px-6 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 ${
-              activeCategory === "defense"
-                ? "bg-slate-800 border-slate-700 text-white"
-                : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60"
-            }`}
-          >
-            Defensive Security
-          </button>
-          <button
-            onClick={() => handleCategoryChange("offense")}
-            className={`px-6 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 ${
-              activeCategory === "offense"
-                ? "bg-slate-800 border-slate-700 text-white"
-                : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60"
-            }`}
-          >
-            Offensive Security
-          </button>
-          <button
-            onClick={() => handleCategoryChange("advisory")}
-            className={`px-6 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 ${
-              activeCategory === "advisory"
-                ? "bg-slate-800 border-slate-700 text-white"
-                : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60"
-            }`}
-          >
-            Advisory & Compliance
-          </button>
+        <div className="mb-14 flex justify-center">
+          <div className="flex w-full max-w-3xl flex-col gap-2 rounded-2xl border border-white/10 bg-white/[0.03] p-2 backdrop-blur-sm sm:flex-row">
+            {(
+              [
+                { key: "defense", label: "Defensive Security" },
+                { key: "offense", label: "Offensive Security" },
+                { key: "advisory", label: "Advisory & Compliance" },
+              ] as const
+            ).map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => handleCategoryChange(tab.key)}
+                className={`flex-1 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-300 ${
+                  activeCategory === tab.key
+                    ? "bg-gradient-to-b from-brand-bright to-brand text-white shadow-[0_14px_30px_-18px_hsl(var(--brand)/0.95)]"
+                    : "text-slate-400 hover:bg-white/[0.05] hover:text-white"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* MAIN SIDE-BY-SIDE INTERACTIVE LAYOUT */}
         <div className="grid grid-cols-12 gap-8 items-start">
-          
           {/* LEFT COLUMN: VERTICAL SERVICE TABS */}
           <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-3">
             {activeServices.map((service, index) => {
@@ -223,96 +213,100 @@ export default function Services() {
                 <button
                   key={index}
                   onClick={() => handleServiceClick(index)}
-                  className={`w-full flex items-center justify-between p-5 rounded-2xl text-left border transition-all duration-300 group ${
+                  className={`group relative w-full overflow-hidden rounded-2xl border p-4 text-left transition-all duration-300 sm:p-5 ${
                     isSelected
-                      ? "bg-slate-800/80 border-slate-700 text-white"
-                      : "bg-[#0b1121]/50 border-white/10 text-slate-300 hover:text-white hover:bg-slate-800/30 hover:border-white/20"
+                      ? "border-brand/45 bg-gradient-to-r from-brand/[0.14] to-white/[0.03] text-white shadow-[0_20px_45px_-32px_hsl(var(--brand)/0.9)]"
+                      : "border-white/10 bg-white/[0.02] text-slate-300 hover:border-white/20 hover:bg-white/[0.04] hover:text-white"
                   }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-colors ${
-                        isSelected
-                          ? "bg-slate-900 border-slate-800"
-                          : "bg-slate-950 border-white/10 group-hover:border-white/20"
-                      }`}
-                    >
-                      <Icon className={`w-5 h-5 ${isSelected ? "text-primary" : "text-slate-300"}`} />
-                    </div>
-                    <span className="font-semibold text-sm leading-tight max-w-[200px] sm:max-w-none">
-                      {service.title}
-                    </span>
-                  </div>
-                  <ChevronRight
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      isSelected
-                        ? "translate-x-1 text-white"
-                        : "text-slate-500 group-hover:translate-x-1 group-hover:text-slate-300"
+                  {/* active accent bar */}
+                  <span
+                    className={`absolute left-0 top-1/2 h-8 w-[2px] -translate-y-1/2 rounded-full bg-brand-bright transition-opacity duration-300 ${
+                      isSelected ? "opacity-100" : "opacity-0"
                     }`}
                   />
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      <div
+                        className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border transition-colors ${
+                          isSelected
+                            ? "border-brand/40 bg-brand/10"
+                            : "border-white/10 bg-black/40 group-hover:border-white/20"
+                        }`}
+                      >
+                        <Icon className={`w-5 h-5 ${isSelected ? "text-brand-bright" : "text-slate-300"}`} />
+                      </div>
+                      <span className="text-sm font-semibold leading-tight max-w-[200px] sm:max-w-none">
+                        {service.title}
+                      </span>
+                    </div>
+                    <ChevronRight
+                      className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${
+                        isSelected
+                          ? "translate-x-0.5 text-brand-bright"
+                          : "text-slate-600 group-hover:translate-x-0.5 group-hover:text-slate-300"
+                      }`}
+                    />
+                  </div>
                 </button>
               );
             })}
           </div>
 
           {/* RIGHT COLUMN: SERVICE DETAIL PANE */}
-          <Card 
+          <Card
             ref={detailPaneRef}
-            className="scroll-mt-20 col-span-12 md:col-span-7 lg:col-span-8 bg-[#0b1121]/20 backdrop-blur-xl border-2 border-white/12 p-6 sm:p-8 rounded-3xl min-h-[380px] flex flex-col justify-between"
+            className="col-span-12 md:col-span-7 lg:col-span-8 min-h-[380px] scroll-mt-20 flex flex-col justify-between rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.015] p-6 backdrop-blur-xl sm:p-8 shadow-[0_35px_80px_-50px_rgba(0,0,0,1)]"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              
               {/* DETAIL SUB-COLUMN A: ILLUSTRATIVE IMAGE */}
               <div className="lg:col-span-4 col-span-12">
-                <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-lg aspect-video lg:aspect-square w-full max-w-[280px] lg:max-w-none mx-auto">
+                <div className="relative aspect-video w-full max-w-[280px] mx-auto overflow-hidden rounded-2xl border border-white/10 shadow-lg lg:aspect-square lg:max-w-none">
                   <img
                     src={currentService.image}
                     alt={currentService.title}
                     className="w-full h-full object-cover opacity-90 transition-transform duration-500 hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1d]/60 to-transparent pointer-events-none" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#08080A]/70 via-transparent to-transparent" />
+                  <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-brand/10" />
                 </div>
               </div>
 
               {/* DETAIL SUB-COLUMN B: DETAILS INFO */}
               <div className="lg:col-span-8 col-span-12 flex flex-col justify-center space-y-4">
                 <div>
-                  <span className="text-[11px] font-bold text-primary uppercase tracking-widest block mb-2">
+                  <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.22em] text-brand-bright">
                     {activeCategory === "defense"
                       ? "Defensive Security"
                       : activeCategory === "offense"
                       ? "Offensive Security"
                       : "Advisory & Compliance"}
                   </span>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-4 leading-tight tracking-tight">
+
+                  <h3 className="mb-4 text-2xl font-bold leading-tight tracking-tight text-white">
                     {currentService.title}
                   </h3>
-                  
-                  <p className="text-slate-400 text-sm leading-relaxed font-light">
+
+                  <p className="text-sm font-light leading-relaxed text-slate-400">
                     {currentService.desc}
                   </p>
                 </div>
               </div>
-
             </div>
 
             {/* ACTION FOOTER */}
-            <div className="mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row gap-4 items-center justify-between">
-              <p className="text-sm text-slate-400 font-normal text-center sm:text-left">
+            <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
+              <p className="text-center text-sm font-normal text-slate-400 sm:text-left">
                 Need more information or a customized solution? Let's talk.
               </p>
               <Link to="/contact" className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 h-12 rounded-xl transition-all">
+                <Button className="h-12 w-full rounded-xl bg-gradient-to-b from-brand-bright to-brand px-8 font-semibold text-white shadow-[0_16px_35px_-20px_hsl(var(--brand)/0.95)] transition-all hover:brightness-110 sm:w-auto">
                   Contact Us
                 </Button>
               </Link>
             </div>
-
           </Card>
-
         </div>
-
       </div>
     </section>
   );

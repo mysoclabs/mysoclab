@@ -25,29 +25,35 @@ const reasons = [
 
 export const WhyChooseUs = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Why Choose <span className="text-primary">MySocLabs</span>
+    <section className="relative overflow-hidden py-20 lg:py-24">
+      {/* top separation */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.015] via-transparent to-transparent" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 tracking-tight">
+            Why Choose <span className="text-brand-bright">MySocLabs</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground leading-relaxed">
             We combine expertise, technology, and dedication to deliver unparalleled cybersecurity solutions
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="text-center animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.045] to-white/[0.012] p-7 text-center transition-all duration-500 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_28px_60px_-38px_hsl(var(--brand)/0.55)]"
             >
-              <div className="inline-flex p-4 rounded-full bg-primary/10 mb-4">
-                <reason.icon className="w-8 h-8 text-primary" />
+              {/* hover top accent */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/0 to-transparent transition-all duration-500 group-hover:via-brand/60" />
+
+              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/25 bg-brand/[0.08] transition-colors duration-300 group-hover:border-brand/50 group-hover:bg-brand/[0.14]">
+                <reason.icon className="h-7 w-7 text-brand-bright" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">{reason.title}</h3>
-              <p className="text-muted-foreground">{reason.description}</p>
+              <h3 className="mb-3 text-lg font-semibold tracking-tight">{reason.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{reason.description}</p>
             </div>
           ))}
         </div>

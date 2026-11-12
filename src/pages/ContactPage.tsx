@@ -86,27 +86,31 @@ const ContactPage = () => {
     }
   };
 
+  const fieldClass =
+    "h-11 rounded-xl border-white/10 bg-white/[0.03] text-foreground placeholder:text-slate-500 focus:border-brand/50 focus-visible:ring-brand/25";
+
   return (
-    <div className="min-h-screen bg-[#030712]">
+    <div className="min-h-screen bg-[#08080A]">
       <Navigation />
       <main className="pt-16">
-        <section className="py-20 relative overflow-hidden">
+        <section className="relative overflow-hidden py-20">
           {/* Background ambient elements */}
-          <div className="absolute top-[-15%] right-[-10%] w-[700px] h-[700px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-[-15%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-600/5 blur-[120px] pointer-events-none" />
+          <div className="pointer-events-none absolute inset-0 grid-veil opacity-35" />
+          <div className="pointer-events-none absolute top-[-15%] right-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.14),transparent_68%)] blur-2xl" />
+          <div className="pointer-events-none absolute bottom-[-15%] left-[-10%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.07),transparent_70%)] blur-2xl" />
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-6xl mx-auto">
 
               {/* HEADER */}
               <div className="text-center mb-16">
-                <span className="text-sm font-semibold text-primary uppercase tracking-widest block mb-3">
+                <span className="section-eyebrow is-centered justify-center mb-4">
                   Get In Touch
                 </span>
                 <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-white tracking-tight">
-                  Contact <span className="text-primary">Us</span>
+                  Contact <span className="text-brand-bright">Us</span>
                 </h1>
-                <p className="text-lg text-slate-400 font-light max-w-2xl mx-auto">
+                <p className="text-lg text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
                   Ready to secure your digital future? Contact us today for a consultation
                 </p>
               </div>
@@ -116,12 +120,12 @@ const ContactPage = () => {
 
                 {/* ===== LEFT: CONTACT FORM ===== */}
                 <div className="lg:col-span-7">
-                  <Card className="bg-[#0b1121]/40 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden">
-                    <CardHeader className="px-8 pt-8 pb-2">
+                  <Card className="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.015] backdrop-blur-xl shadow-[0_35px_80px_-50px_rgba(0,0,0,1)]">
+                    <CardHeader className="px-6 pt-8 pb-2 sm:px-8">
                       <CardTitle className="text-xl font-semibold text-white tracking-tight">Send us a message</CardTitle>
                       <p className="text-sm text-slate-400 font-light mt-1">Fill out the form below and we'll get back to you shortly.</p>
                     </CardHeader>
-                    <CardContent className="px-8 pb-8">
+                    <CardContent className="px-6 pb-8 sm:px-8">
                       <form onSubmit={onSubmit} className="space-y-6">
 
                         {/* Row 1: Full Name & Email */}
@@ -137,7 +141,7 @@ const ContactPage = () => {
                               maxLength={100}
                               required
                               placeholder="John Doe"
-                              className="bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 h-11 rounded-xl"
+                              className={fieldClass}
                             />
                           </div>
                           <div className="space-y-2">
@@ -150,7 +154,7 @@ const ContactPage = () => {
                               autoComplete="email"
                               required
                               placeholder="you@company.com"
-                              className="bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 h-11 rounded-xl"
+                              className={fieldClass}
                             />
                           </div>
                         </div>
@@ -160,7 +164,7 @@ const ContactPage = () => {
                           <Label className="text-sm text-slate-300 font-medium">Mobile Number</Label>
                           <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-3">
                             <Select value={phoneCountryCode} onValueChange={(v) => setPhoneCountryCode(v)}>
-                              <SelectTrigger className="bg-[#0a0f1c] border-white/10 text-white h-11 rounded-xl">
+                              <SelectTrigger className="h-11 rounded-xl border-white/10 bg-white/[0.03] text-white">
                                 <SelectValue placeholder="Code" />
                               </SelectTrigger>
                               <SelectContent>
@@ -179,7 +183,7 @@ const ContactPage = () => {
                               autoComplete="tel"
                               pattern="[\d\s\-()]{4,20}"
                               maxLength={20}
-                              className="bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 h-11 rounded-xl"
+                              className={fieldClass}
                             />
                           </div>
                         </div>
@@ -195,13 +199,13 @@ const ContactPage = () => {
                               autoComplete="organization"
                               maxLength={100}
                               placeholder="Acme Corp"
-                              className="bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 h-11 rounded-xl"
+                              className={fieldClass}
                             />
                           </div>
                           <div className="space-y-2">
                             <Label className="text-sm text-slate-300 font-medium">Subject</Label>
                             <Select value={subject} onValueChange={(v) => setSubject(v)}>
-                              <SelectTrigger className="bg-[#0a0f1c] border-white/10 text-white h-11 rounded-xl">
+                              <SelectTrigger className="h-11 rounded-xl border-white/10 bg-white/[0.03] text-white">
                                 <SelectValue placeholder="Select a subject" />
                               </SelectTrigger>
                               <SelectContent>
@@ -223,7 +227,7 @@ const ContactPage = () => {
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder="Your message..."
                             maxLength={2000}
-                            className="min-h-40 bg-[#0a0f1c] border-white/10 text-white placeholder:text-slate-500 focus:border-primary/50 rounded-xl"
+                            className="min-h-40 rounded-xl border-white/10 bg-white/[0.03] text-foreground placeholder:text-slate-500 focus:border-brand/50 focus-visible:ring-brand/25"
                           />
                         </div>
 
@@ -241,13 +245,13 @@ const ContactPage = () => {
 
                         {/* Error / Success Messages */}
                         {submitError ? <div className="text-sm text-destructive">{submitError}</div> : null}
-                        {submitSuccess ? <div className="text-sm text-primary">Message sent successfully.</div> : null}
+                        {submitSuccess ? <div className="text-sm text-brand-bright">Message sent successfully.</div> : null}
 
                         {/* Submit Button */}
                         <Button
                           type="submit"
                           disabled={!canSubmit || isSubmitting}
-                          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all h-12 rounded-xl text-base font-semibold group"
+                          className="group h-12 w-full rounded-xl bg-gradient-to-b from-brand-bright to-brand text-base font-semibold text-white shadow-[0_18px_40px_-22px_hsl(var(--brand)/0.95)] transition-all hover:brightness-110"
                         >
                           {isSubmitting ? "Sending..." : "Send Message"}
                           {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}
@@ -258,17 +262,17 @@ const ContactPage = () => {
                 </div>
 
                 {/* ===== RIGHT: CONTACT INFO + FAQ ===== */}
-                <div className="lg:col-span-5 space-y-10">
+                <div className="lg:col-span-5 space-y-6">
 
                   {/* Contact Information Card */}
-                  <Card className="bg-[#0b1121]/40 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden">
-                    <CardHeader className="px-8 pt-8 pb-4">
+                  <Card className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] backdrop-blur-xl">
+                    <CardHeader className="px-6 pt-8 pb-4 sm:px-8">
                       <CardTitle className="text-lg font-semibold text-white tracking-tight">Contact Information</CardTitle>
                     </CardHeader>
-                    <CardContent className="px-8 pb-8 space-y-5">
+                    <CardContent className="px-6 pb-8 sm:px-8 space-y-5">
                       <div className="flex gap-4 items-start">
-                        <div className="h-11 w-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                          <Mail className="w-5 h-5 text-primary" />
+                        <div className="h-11 w-11 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0">
+                          <Mail className="w-5 h-5 text-brand-bright" />
                         </div>
                         <div>
                           <div className="text-sm font-medium text-white">Email</div>
@@ -279,8 +283,8 @@ const ContactPage = () => {
                       <div className="w-full h-px bg-white/5" />
 
                       <div className="flex gap-4 items-start">
-                        <div className="h-11 w-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                          <MapPin className="w-5 h-5 text-primary" />
+                        <div className="h-11 w-11 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0">
+                          <MapPin className="w-5 h-5 text-brand-bright" />
                         </div>
                         <div>
                           <div className="text-sm font-medium text-white">Address</div>
@@ -291,8 +295,8 @@ const ContactPage = () => {
                       <div className="w-full h-px bg-white/5" />
 
                       <div className="flex gap-4 items-start">
-                        <div className="h-11 w-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                          <Clock className="w-5 h-5 text-primary" />
+                        <div className="h-11 w-11 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0">
+                          <Clock className="w-5 h-5 text-brand-bright" />
                         </div>
                         <div>
                           <div className="text-sm font-medium text-white">Hours</div>
@@ -303,14 +307,14 @@ const ContactPage = () => {
                   </Card>
 
                   {/* FAQ Accordion */}
-                  <Card className="bg-[#0b1121]/40 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden">
-                    <CardHeader className="px-8 pt-8 pb-4">
+                  <Card className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] backdrop-blur-xl">
+                    <CardHeader className="px-6 pt-8 pb-4 sm:px-8">
                       <CardTitle className="text-lg font-semibold text-white tracking-tight">Frequently Asked Questions</CardTitle>
                     </CardHeader>
-                    <CardContent className="px-8 pb-8">
+                    <CardContent className="px-6 pb-8 sm:px-8">
                       <Accordion type="single" collapsible className="w-full">
                         <AccordionItem value="response-time" className="border-white/5">
-                          <AccordionTrigger className="text-sm font-medium text-white hover:no-underline hover:text-primary py-4">
+                          <AccordionTrigger className="text-sm font-medium text-white hover:no-underline hover:text-brand-bright py-4">
                             How quickly do you respond?
                           </AccordionTrigger>
                           <AccordionContent className="text-sm text-slate-400 font-light">
@@ -318,7 +322,7 @@ const ContactPage = () => {
                           </AccordionContent>
                         </AccordionItem>
                         <AccordionItem value="consultations" className="border-white/5">
-                          <AccordionTrigger className="text-sm font-medium text-white hover:no-underline hover:text-primary py-4">
+                          <AccordionTrigger className="text-sm font-medium text-white hover:no-underline hover:text-brand-bright py-4">
                             Do you offer consultations?
                           </AccordionTrigger>
                           <AccordionContent className="text-sm text-slate-400 font-light">
@@ -326,7 +330,7 @@ const ContactPage = () => {
                           </AccordionContent>
                         </AccordionItem>
                         <AccordionItem value="remote-work" className="border-b-0 border-white/5">
-                          <AccordionTrigger className="text-sm font-medium text-white hover:no-underline hover:text-primary py-4">
+                          <AccordionTrigger className="text-sm font-medium text-white hover:no-underline hover:text-brand-bright py-4">
                             Do you work remotely?
                           </AccordionTrigger>
                           <AccordionContent className="text-sm text-slate-400 font-light">
@@ -338,9 +342,9 @@ const ContactPage = () => {
                   </Card>
 
                   {/* Trust Badge */}
-                  <div className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-[#0b1121]/30 border border-white/5">
-                    <div className="h-10 w-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
-                      <Shield className="w-5 h-5 text-primary" />
+                  <div className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/[0.02] border border-white/10">
+                    <div className="h-10 w-10 rounded-xl bg-brand/10 border border-brand/20 flex items-center justify-center flex-shrink-0">
+                      <Shield className="w-5 h-5 text-brand-bright" />
                     </div>
                     <div>
                       <p className="text-xs text-slate-400 font-light">

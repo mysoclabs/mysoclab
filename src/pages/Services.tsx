@@ -6,18 +6,18 @@ import { Link } from "react-router-dom";
 
 const ServicesPage = () => {
   return (
-    <div className="min-h-screen bg-[#0a0f1d]">
+    <div className="min-h-screen bg-[#08080A]">
       <Navigation />
       <div className="pt-16">
         <Services />
       </div>
 
-      <div className="pb-10">
+      <div className="pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
           <Link to="/contact">
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground transition-all"
+              className="rounded-xl bg-gradient-to-b from-brand-bright to-brand px-8 font-semibold text-white shadow-[0_18px_40px_-22px_hsl(var(--brand)/0.95)] transition-all hover:brightness-110"
             >
               Schedule a Consultation
             </Button>

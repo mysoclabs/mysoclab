@@ -5,7 +5,11 @@ import logo from "@/assets/logom.png";
 export const ERD = () => {
   return (
     <section className="relative overflow-hidden py-24">
-      <div className="container mx-auto px-6">
+      {/* ambient + grid */}
+      <div className="pointer-events-none absolute inset-0 grid-veil opacity-30" />
+      <div className="pointer-events-none absolute right-[-10%] top-1/4 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.12),transparent_70%)] blur-2xl" />
+
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
 
           {/* LEFT CONTENT */}
@@ -13,11 +17,13 @@ export const ERD = () => {
 
             {/* LOGO + NAME */}
             <div className="flex items-center gap-3 group">
-              <img
-                src={logo}
-                alt="Red Eagle"
-                className="h-14 w-14 transition-all duration-300"
-              />
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
+                <img
+                  src={logo}
+                  alt="Red Eagle"
+                  className="h-10 w-10 transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
               <span
                 className="
                   text-xl font-semibold
@@ -30,9 +36,9 @@ export const ERD = () => {
             </div>
 
             {/* HEADING */}
-            <h2 className="text-4xl font-bold leading-tight md:text-5xl">
+            <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl">
               Endpoint Detection <br />
-              <span className="text-cyan-400">
+              <span className="text-brand-bright">
                 and Response Platform
               </span>
             </h2>
@@ -56,8 +62,8 @@ export const ERD = () => {
                 <Button
                   variant="outline"
                   className="
-                    border-cyan-400/40 text-cyan-400
-                    hover:border-cyan-400 hover:bg-cyan-400/10
+                    rounded-xl border-brand/40 bg-brand/[0.06] text-brand-bright
+                    hover:border-brand/70 hover:bg-brand/10 hover:text-brand-soft
                     transition-all duration-300
                   "
                 >
@@ -71,18 +77,22 @@ export const ERD = () => {
           <div className="relative flex justify-center">
             <div
               className="
-                flex h-[380px] w-[380px]
+                relative flex h-[380px] w-[380px] max-w-full
                 items-center justify-center
-                rounded-2xl border border-cyan-400/30
-                bg-gradient-to-br from-cyan-400/20 to-blue-600/10
+                overflow-hidden rounded-2xl border border-brand/25
+                bg-gradient-to-br from-brand/[0.16] via-white/[0.03] to-transparent
+                shadow-[0_40px_90px_-50px_hsl(var(--brand)/0.55)]
                 transition-transform duration-500 ease-out
                 hover:-translate-y-3
               "
             >
+              {/* inner ring + glow */}
+              <div className="pointer-events-none absolute inset-6 rounded-xl border border-white/[0.06]" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,hsl(var(--brand)/0.16),transparent_62%)]" />
               <img
                 src={logo}
                 alt="Red Eagle EDR"
-                className="w-52 opacity-90"
+                className="relative z-10 w-52 opacity-90"
               />
             </div>
           </div>
