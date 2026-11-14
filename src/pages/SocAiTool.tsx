@@ -200,9 +200,6 @@ const SocAiTool = () => {
 
       {/* ================= SECTION 2: WHY CHOOSE RED EAGLE EDR ================= */}
       <section className="py-24 bg-[#121212] relative overflow-hidden">
-        {/* Subtle red glow in background */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-900/5 rounded-full blur-[120px] pointer-events-none" />
-
         <div className="container mx-auto px-6 max-w-5xl relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 

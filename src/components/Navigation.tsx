@@ -63,9 +63,13 @@ export const Navigation = () => {
               <Link to="/soc-ai-tool">
                 <Button
                   variant="outline"
-                  className="gap-2 rounded-full border-brand/35 bg-brand/[0.06] px-4 text-foreground hover:border-brand/60 hover:bg-brand/10 hover:text-foreground"
+                  className="group gap-2 rounded-full border-brand/45 bg-gradient-to-b from-brand/[0.14] to-brand/[0.05] px-4 font-semibold text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_10px_24px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 hover:border-brand/75 hover:from-brand/[0.22] hover:to-brand/[0.09] hover:text-white hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.07),0_12px_28px_-16px_rgba(0,0,0,0.95)]"
                 >
-                  <img src={redEagleLogo} alt="Red Eagle" className="w-5 h-5" />
+                  <img
+                    src={redEagleLogo}
+                    alt="Red Eagle"
+                    className="h-5 w-5 brightness-110 saturate-[1.15] transition-transform duration-300 group-hover:scale-105"
+                  />
                   Red Eagle
                 </Button>
               </Link>
@@ -148,9 +152,13 @@ export const Navigation = () => {
           <Link to="/soc-ai-tool" onClick={() => setIsOpen(false)}>
             <Button
               variant="outline"
-              className="w-full gap-2 rounded-full border-brand/35 bg-brand/[0.06] hover:border-brand/60 hover:bg-brand/10 hover:text-foreground"
+              className="group w-full gap-2 rounded-full border-brand/45 bg-gradient-to-b from-brand/[0.14] to-brand/[0.05] font-semibold text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_10px_24px_-18px_rgba(0,0,0,0.9)] transition-all duration-300 hover:border-brand/75 hover:from-brand/[0.22] hover:to-brand/[0.09] hover:text-white"
             >
-              <img src={redEagleLogo} alt="Red Eagle" className="w-5 h-5" />
+              <img
+                src={redEagleLogo}
+                alt="Red Eagle"
+                className="h-5 w-5 brightness-110 saturate-[1.15] transition-transform duration-300 group-hover:scale-105"
+              />
               Red Eagle
             </Button>
           </Link>

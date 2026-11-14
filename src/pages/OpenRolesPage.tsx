@@ -22,7 +22,6 @@ export default function OpenRolesPage() {
             WebkitMaskImage: "radial-gradient(ellipse at 50% 40%, black 10%, transparent 78%)",
           }}
         />
-        <div className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.12),transparent_68%)] blur-2xl" />
 
         <div className="container mx-auto px-6 relative z-10 max-w-2xl text-center">
           <motion.div

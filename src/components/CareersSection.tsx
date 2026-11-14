@@ -15,7 +15,6 @@ export const CareersSection = () => {
           WebkitMaskImage: "radial-gradient(ellipse at 30% 40%, black 10%, transparent 75%)",
         }}
       />
-      <div className="pointer-events-none absolute left-[-10%] top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.10),transparent_70%)] blur-2xl" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -67,7 +66,7 @@ export const CareersSection = () => {
                   <Link to="/careers" className="block w-full">
                     <Button
                       size="lg"
-                      className="w-full rounded-xl bg-gradient-to-b from-brand-bright to-brand font-bold text-white shadow-[0_18px_40px_-22px_hsl(var(--brand)/0.95)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
+                      className="w-full rounded-xl bg-gradient-to-b from-brand-bright to-brand font-bold text-white shadow-[0_18px_40px_-22px_rgba(0,0,0,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
                     >
                       Explore Careers Page →
                     </Button>

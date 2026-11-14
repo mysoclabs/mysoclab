@@ -7,7 +7,6 @@ export const ERD = () => {
     <section className="relative overflow-hidden py-24">
       {/* ambient + grid */}
       <div className="pointer-events-none absolute inset-0 grid-veil opacity-30" />
-      <div className="pointer-events-none absolute right-[-10%] top-1/4 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.12),transparent_70%)] blur-2xl" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
@@ -80,15 +79,14 @@ export const ERD = () => {
                 relative flex h-[380px] w-[380px] max-w-full
                 items-center justify-center
                 overflow-hidden rounded-2xl border border-brand/25
-                bg-gradient-to-br from-brand/[0.16] via-white/[0.03] to-transparent
-                shadow-[0_40px_90px_-50px_hsl(var(--brand)/0.55)]
+                bg-gradient-to-br from-brand/[0.10] via-white/[0.03] to-transparent
+                shadow-[0_40px_90px_-50px_rgba(0,0,0,0.9)]
                 transition-transform duration-500 ease-out
                 hover:-translate-y-3
               "
             >
-              {/* inner ring + glow */}
+              {/* inner ring */}
               <div className="pointer-events-none absolute inset-6 rounded-xl border border-white/[0.06]" />
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,hsl(var(--brand)/0.16),transparent_62%)]" />
               <img
                 src={logo}
                 alt="Red Eagle EDR"

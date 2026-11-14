@@ -7,7 +7,7 @@
 /* ==========================================================================
    MySOC Labs — Brand Design System
    Palette derived from the MySOC Labs shield logo:
-   - Shield red  : #D11422 (bright #F52A38, deep #8F0A14)
+   - Shield red  : #EC1822 (bright #F4343D, deep #79151A)
    - Ink / black : #0A0A0A
    - Paper/white : #FFFFFF
    All colors are HSL per project convention.
@@ -25,7 +25,7 @@
     --popover-foreground: 0 0% 97%;
 
     /* Solid brand fill — used for buttons, badges, active states */
-    --primary: 356 82% 45%;
+    --primary: 357 85% 51%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 11%;
@@ -43,42 +43,43 @@
 
     --border: 0 0% 16%;
     --input: 0 0% 18%;
-    --ring: 356 85% 55%;
+    --ring: 357 88% 58%;
 
     --radius: 0.75rem;
 
     /* Brand scale */
-    --brand: 356 82% 45%;
-    --brand-bright: 356 92% 60%;
-    --brand-soft: 356 100% 74%;
-    --brand-deep: 356 75% 24%;
+    --brand: 357 85% 51%;
+    --brand-bright: 357 90% 58%;
+    --brand-soft: 357 100% 74%;
+    --brand-deep: 357 70% 28%;
 
     /* Surfaces */
     --surface: 0 0% 7%;
     --surface-raised: 0 0% 10%;
 
     /* Elevation & motion */
-    --gradient-brand: linear-gradient(135deg, hsl(356 92% 55%), hsl(356 85% 36%));
+    --gradient-brand: linear-gradient(135deg, hsl(357 90% 56%), hsl(357 85% 44%));
     --gradient-panel: linear-gradient(160deg, hsl(0 0% 9% / 0.85), hsl(0 0% 4% / 0.7));
     --shadow-elevated: 0 24px 60px -24px hsl(0 0% 0% / 0.85);
-    --shadow-brand: 0 18px 50px -22px hsl(356 82% 45% / 0.5);
+    /* Neutral elevation only — no red bloom around cards */
+    --shadow-brand: 0 18px 50px -22px hsl(0 0% 0% / 0.85);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Legacy aliases kept for compatibility */
-    --cyber-glow: 356 85% 50%;
-    --cyber-grid: 356 40% 22%;
-    --gradient-cyber: linear-gradient(135deg, hsl(356 82% 45% / 0.12), hsl(0 0% 7%));
-    --shadow-cyber: 0 0 30px hsl(356 82% 45% / 0.3);
+    --cyber-glow: 357 88% 58%;
+    --cyber-grid: 0 0% 22%;
+    --gradient-cyber: linear-gradient(135deg, hsl(0 0% 10%), hsl(0 0% 7%));
+    --shadow-cyber: 0 0 30px hsl(0 0% 0% / 0.45);
 
     /* Sidebar variables */
     --sidebar-background: 0 0% 6%;
     --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 356 82% 45%;
+    --sidebar-primary: 357 85% 51%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 0 0% 12%;
     --sidebar-accent-foreground: 0 0% 96%;
     --sidebar-border: 0 0% 16%;
-    --sidebar-ring: 356 85% 55%;
+    --sidebar-ring: 357 88% 58%;
 
     /* Red Eagle theme base variables (standalone page — unchanged) */
     --eagle-bg: 0 0% 4%;
@@ -97,7 +98,7 @@
     --popover: 0 0% 7%;
     --popover-foreground: 0 0% 97%;
 
-    --primary: 356 82% 45%;
+    --primary: 357 85% 51%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 11%;
@@ -114,16 +115,16 @@
 
     --border: 0 0% 16%;
     --input: 0 0% 18%;
-    --ring: 356 85% 55%;
+    --ring: 357 88% 58%;
 
     --sidebar-background: 0 0% 6%;
     --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 356 82% 45%;
+    --sidebar-primary: 357 85% 51%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 0 0% 12%;
     --sidebar-accent-foreground: 0 0% 96%;
     --sidebar-border: 0 0% 16%;
-    --sidebar-ring: 356 85% 55%;
+    --sidebar-ring: 357 88% 58%;
   }
 }
 
@@ -180,7 +181,7 @@
 
   ::-webkit-scrollbar {
     width: 10px;
-    height: 10px;
+    height: 0;
   }
 
   ::-webkit-scrollbar-track {
@@ -197,6 +198,31 @@
     background: hsl(var(--brand) / 0.75);
   }
 
+  html.services-hide-scrollbar {
+    scrollbar-width: none;
+  }
+
+  html.services-hide-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  /* Contact page only: hide the visual scrollbar; scrolling stays fully functional */
+  html.contact-hide-scrollbar,
+  html.contact-hide-scrollbar body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* legacy Edge */
+  }
+
+  html.contact-hide-scrollbar::-webkit-scrollbar,
+  html.contact-hide-scrollbar body::-webkit-scrollbar {
+    /* Chrome, Edge, Safari */
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
   /* Custom Animations */
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
@@ -204,8 +230,8 @@
   }
 
   @keyframes glow-pulse {
-    0%, 100% { box-shadow: 0 0 20px hsl(var(--brand) / 0.25); }
-    50% { box-shadow: 0 0 40px hsl(var(--brand) / 0.45); }
+    0%, 100% { box-shadow: 0 0 20px hsl(0 0% 0% / 0.25); }
+    50% { box-shadow: 0 0 40px hsl(0 0% 0% / 0.4); }
   }
 
   @keyframes brand-sheen {
@@ -318,8 +344,7 @@
   .panel-hover:hover {
     transform: translateY(-4px);
     border-color: hsl(var(--brand) / 0.45);
-    box-shadow: 0 24px 50px -28px hsl(0 0% 0% / 0.95),
-      0 0 0 1px hsl(var(--brand) / 0.12);
+    box-shadow: 0 24px 50px -28px hsl(0 0% 0% / 0.95);
   }
 
   .hairline {
@@ -336,8 +361,9 @@
     mask-image: radial-gradient(ellipse at 50% 0%, #000 10%, transparent 72%);
   }
 
+  /* Neutral top light — intentionally no red ambient bloom */
   .brand-aura {
-    background: radial-gradient(58% 55% at 50% 0%, hsl(var(--brand) / 0.16), transparent 70%);
+    background: radial-gradient(58% 55% at 50% 0%, hsl(0 0% 100% / 0.035), transparent 70%);
   }
 
   .text-gradient-brand {
@@ -441,5 +467,153 @@ section.is-visible, footer.is-visible, .reveal-on-scroll.is-visible {
   .reveal-on-scroll {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ==========================================================================
+   "Why Choose MySocLabs" card marquee
+   Scoped strictly to the WhyChooseUs section. The marquee lives inside the
+   section's centered container, so the track is clipped within that limited
+   width and never spills into the page margins. Four duplicated tracks scroll
+   right-to-left at a slow constant speed and loop seamlessly (one track
+   width = 25% of the total track, so the loop point is invisible).
+   ========================================================================== */
+
+.why-choose-marquee {
+  overflow: hidden;
+  /* Soft fade at both container edges so cards never appear hard-clipped */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 4rem,
+    #000 calc(100% - 4rem),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 4rem,
+    #000 calc(100% - 4rem),
+    transparent 100%
+  );
+}
+
+.why-choose-track {
+  display: flex;
+  width: max-content;
+  animation: why-choose-scroll 60s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.why-choose-marquee:hover .why-choose-track,
+.why-choose-marquee:focus-within .why-choose-track,
+.why-choose-marquee:active .why-choose-track {
+  animation-play-state: paused;
+}
+
+@keyframes why-choose-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-25%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .why-choose-marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .why-choose-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .why-choose-clone {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   "Our Approach to Cybersecurity" stage detail
+   Scoped to the AboutPage timeline: a restrained fade/slide when the
+   selected stage changes. Motion is neutralised by the reduced-motion rules.
+   ========================================================================== */
+
+.approach-detail {
+  animation: approach-detail-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes approach-detail-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Travelling signal dot on the "Our Approach" timeline
+   A single small brand-red dot flows along the connector (horizontally on
+   desktop/tablet, vertically on the stacked mobile timeline). It fades in at
+   the first stage and out at the last, so the loop restart is never a jump.
+   ========================================================================== */
+
+.approach-dot {
+  will-change: left, top, opacity;
+}
+
+.approach-dot-x {
+  animation: approach-dot-travel-x 12s linear infinite;
+}
+
+.approach-dot-y {
+  animation: approach-dot-travel-y 12s linear infinite;
+}
+
+@keyframes approach-dot-travel-x {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes approach-dot-travel-y {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .approach-dot {
+    display: none !important;
   }
 }

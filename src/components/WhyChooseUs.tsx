@@ -1,4 +1,4 @@
-import { Award, Zap, HeadphonesIcon, TrendingUp } from "lucide-react";
+import { Award, Zap, HeadphonesIcon, TrendingUp, ShieldCheck } from "lucide-react";
 
 const reasons = [
   {
@@ -21,7 +21,28 @@ const reasons = [
     title: "Continuous Innovation",
     description: "Always evolving with the latest security technologies and methodologies.",
   },
+  {
+    icon: ShieldCheck,
+    title: "Continuous Security Improvement",
+    description:
+      "Strengthen your security posture through proactive assessments, continuous monitoring and actionable recommendations.",
+  },
 ];
+
+type Reason = (typeof reasons)[number];
+
+const ReasonCard = ({ reason }: { reason: Reason }) => (
+  <div className="group relative h-full w-[17rem] shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.045] to-white/[0.012] p-6 text-center transition-all duration-500 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_28px_60px_-38px_rgba(0,0,0,0.9)] sm:w-[19rem] lg:w-[21rem]">
+    {/* hover top accent */}
+    <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/0 to-transparent transition-all duration-500 group-hover:via-brand/60" />
+
+    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-brand/25 bg-brand/[0.08] transition-colors duration-300 group-hover:border-brand/50 group-hover:bg-brand/[0.14]">
+      <reason.icon className="h-6 w-6 text-brand-bright" />
+    </div>
+    <h3 className="mb-2 text-lg font-semibold tracking-tight">{reason.title}</h3>
+    <p className="text-sm leading-relaxed text-muted-foreground">{reason.description}</p>
+  </div>
+);
 
 export const WhyChooseUs = () => {
   return (
@@ -39,23 +60,32 @@ export const WhyChooseUs = () => {
             We combine expertise, technology, and dedication to deliver unparalleled cybersecurity solutions
           </p>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {reasons.map((reason, index) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.045] to-white/[0.012] p-7 text-center transition-all duration-500 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_28px_60px_-38px_hsl(var(--brand)/0.55)]"
-            >
-              {/* hover top accent */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/0 to-transparent transition-all duration-500 group-hover:via-brand/60" />
-
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-brand/25 bg-brand/[0.08] transition-colors duration-300 group-hover:border-brand/50 group-hover:bg-brand/[0.14]">
-                <reason.icon className="h-7 w-7 text-brand-bright" />
-              </div>
-              <h3 className="mb-3 text-lg font-semibold tracking-tight">{reason.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{reason.description}</p>
-            </div>
-          ))}
+      {/* Continuous right-to-left card marquee, clipped inside a centered, limited-width area */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="why-choose-marquee mx-auto max-w-6xl py-2">
+          <div className="why-choose-track">
+            {[0, 1, 2, 3].map((group) => {
+              const isClone = group !== 0;
+              return (
+                <div
+                  key={group}
+                  className={`why-choose-group flex shrink-0 items-stretch gap-5 pr-5 lg:gap-6 lg:pr-6${
+                    isClone ? " why-choose-clone" : ""
+                  }`}
+                  aria-hidden={isClone ? "true" : undefined}
+                >
+                  {reasons.map((reason) => (
+                    <ReasonCard
+                      key={isClone ? `${reason.title}-clone-${group}` : reason.title}
+                      reason={reason}
+                    />
+                  ))}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

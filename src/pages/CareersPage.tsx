@@ -136,7 +136,6 @@ export default function CareersPage() {
             WebkitMaskImage: "radial-gradient(ellipse at 50% 20%, black 10%, transparent 78%)",
           }}
         />
-        <div className="pointer-events-none absolute left-1/2 top-[-30%] h-[560px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,hsl(var(--brand)/0.16),transparent_68%)] blur-2xl" />
 
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl space-y-6">
           <motion.div
@@ -162,7 +161,7 @@ export default function CareersPage() {
           <div className="flex flex-col items-center gap-6 max-w-xl mx-auto">
             <Link to="/open-roles">
               <Button
-                className="rounded-xl bg-gradient-to-b from-brand-bright to-brand px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-20px_hsl(var(--brand)/0.95)] transition-all duration-300 hover:brightness-110"
+                className="rounded-xl bg-gradient-to-b from-brand-bright to-brand px-8 py-4 text-base font-semibold text-white shadow-[0_18px_40px_-20px_rgba(0,0,0,0.9)] transition-all duration-300 hover:brightness-110"
               >
                 Search Open Roles
               </Button>

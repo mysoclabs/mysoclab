@@ -1,4 +1,4 @@
-import { type FormEvent, useMemo, useState } from "react";
+import { type FormEvent, useEffect, useMemo, useState } from "react";
 
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -15,6 +15,15 @@ import { useNavigate } from "react-router-dom";
 
 const ContactPage = () => {
   const navigate = useNavigate();
+
+  // Hide the visual scrollbar on this page only; wheel, keyboard, touch and
+  // touchpad scrolling remain fully functional.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add("contact-hide-scrollbar");
+    return () => root.classList.remove("contact-hide-scrollbar");
+  }, []);
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneCountryCode, setPhoneCountryCode] = useState<string>("+91");
@@ -96,8 +105,6 @@ const ContactPage = () => {
         <section className="relative overflow-hidden py-20">
           {/* Background ambient elements */}
           <div className="pointer-events-none absolute inset-0 grid-veil opacity-35" />
-          <div className="pointer-events-none absolute top-[-15%] right-[-10%] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.14),transparent_68%)] blur-2xl" />
-          <div className="pointer-events-none absolute bottom-[-15%] left-[-10%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.07),transparent_70%)] blur-2xl" />
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-6xl mx-auto">
@@ -251,7 +258,7 @@ const ContactPage = () => {
                         <Button
                           type="submit"
                           disabled={!canSubmit || isSubmitting}
-                          className="group h-12 w-full rounded-xl bg-gradient-to-b from-brand-bright to-brand text-base font-semibold text-white shadow-[0_18px_40px_-22px_hsl(var(--brand)/0.95)] transition-all hover:brightness-110"
+                          className="group h-12 w-full rounded-xl bg-gradient-to-b from-brand-bright to-brand text-base font-semibold text-white shadow-[0_18px_40px_-22px_rgba(0,0,0,0.9)] transition-all hover:brightness-110"
                         >
                           {isSubmitting ? "Sending..." : "Send Message"}
                           {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />}

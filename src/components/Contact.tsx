@@ -12,7 +12,6 @@ export const Contact = () => {
   return (
     <section id="contact" className="relative overflow-hidden py-20">
       <div className="absolute inset-0 bg-gradient-to-t from-background via-white/[0.02] to-background"></div>
-      <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-[600px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,hsl(var(--brand)/0.12),transparent_70%)] blur-2xl" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto">
@@ -56,7 +55,7 @@ export const Contact = () => {
             <Button
               size="lg"
               onClick={handleConsultation}
-              className="rounded-xl bg-gradient-to-b from-brand-bright to-brand text-white shadow-[0_18px_40px_-20px_hsl(var(--brand)/0.95)] transition-all hover:brightness-110 hover:shadow-[0_22px_50px_-20px_hsl(var(--brand)/1)]"
+              className="rounded-xl bg-gradient-to-b from-brand-bright to-brand text-white shadow-[0_18px_40px_-20px_rgba(0,0,0,0.9)] transition-all hover:brightness-110 hover:shadow-[0_22px_50px_-20px_rgba(0,0,0,0.95)]"
             >
               Schedule a Consultation
             </Button>

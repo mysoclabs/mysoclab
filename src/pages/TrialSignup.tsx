@@ -66,9 +66,6 @@ const TrialSignup = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Background red glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(221,20,20,0.25),transparent_65%)]" />
-
       <section className="relative min-h-screen flex items-center justify-center px-4">
         <Card
           className="
@@ -78,7 +75,6 @@ const TrialSignup = () => {
             bg-black/60
             border border-red-500/30
             backdrop-blur-xl
-            animate-redPulse
           "
         >
           {/* Header */}
@@ -211,7 +207,7 @@ const TrialSignup = () => {
                 className="
                   w-full py-6 text-lg font-bold
                   bg-red-600 hover:bg-red-700
-                  shadow-[0_0_35px_rgba(221,20,20,0.55)]
+                  shadow-[0_14px_30px_-18px_rgba(0,0,0,0.9)]
                   hover:scale-[1.02] transition
                 "
               >
@@ -225,38 +221,6 @@ const TrialSignup = () => {
           </Form>
         </Card>
       </section>
-
-      {/* Heartbeat glow animation */}
-      <style>
-        {`
-          @keyframes redPulse {
-            0% {
-              box-shadow: 
-                0 0 25px rgba(221,20,20,0.25),
-                0 0 50px rgba(221,20,20,0.15);
-            }
-            40% {
-              box-shadow: 
-                0 0 45px rgba(221,20,20,0.55),
-                0 0 90px rgba(221,20,20,0.35);
-            }
-            70% {
-              box-shadow: 
-                0 0 30px rgba(221,20,20,0.35),
-                0 0 60px rgba(221,20,20,0.2);
-            }
-            100% {
-              box-shadow: 
-                0 0 25px rgba(221,20,20,0.25),
-                0 0 50px rgba(221,20,20,0.15);
-            }
-          }
-
-          .animate-redPulse {
-            animation: redPulse 3.2s ease-in-out infinite;
-          }
-        `}
-      </style>
 
       <RedFooter />
     </div>

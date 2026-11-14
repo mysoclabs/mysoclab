@@ -1,71 +1,63 @@
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const features = [
-  "Industry-leading security experts",
-  "24/7 threat monitoring and response",
-  "Advanced AI-powered protection",
-  "Compliance with global standards",
+const features: { title: string }[] = [
+  { title: "Industry-leading security experts" },
+  { title: "24/7 threat monitoring and response" },
+  { title: "Advanced AI-powered protection" },
+  { title: "Compliance with global standards" },
 ];
 
 export const About = () => {
   return (
-    <section id="about" className="relative overflow-hidden py-20 text-foreground lg:py-24">
-      {/* Background grid overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-          maskImage: "radial-gradient(ellipse at 50% 30%, black 10%, transparent 78%)",
-          WebkitMaskImage: "radial-gradient(ellipse at 50% 30%, black 10%, transparent 78%)",
-        }}
-      />
-      <div className="pointer-events-none absolute right-[-10%] top-0 h-[460px] w-[460px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.12),transparent_70%)] blur-2xl" />
+    <section id="about" className="relative overflow-hidden py-20 text-foreground lg:py-28">
+      {/* Refined technical backdrop */}
+      <div className="pointer-events-none absolute inset-0 grid-veil opacity-40" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* TOP: INTRODUCTION */}
+        <div className="max-w-4xl">
+          <h2 className="text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl">
+            Global Leader in <span className="text-brand-bright">Cybersecurity</span>
+          </h2>
 
-          {/* LEFT CONTENT */}
-          <div className="lg:col-span-7 space-y-6">
-            <h2 className="text-4xl sm:text-5xl font-extrabold leading-[1.1] tracking-tight">
-              Global Leader in <span className="text-brand-bright">Cybersecurity</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              MySocLabs is dedicated to safeguarding your data in an ever-evolving digital world. 
-              Our mission is to preserve your digital way of life by countering cyber threats with 
-              innovative solutions and expert knowledge.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed font-medium border-l-2 border-brand/50 pl-5">
-              We excel in providing a differentiated approach to cybersecurity operations.
-            </p>
-          </div>
+          <div className="mt-6 h-px w-24 bg-gradient-to-r from-brand to-transparent" />
 
-          {/* RIGHT GRID OF FEATURES */}
-          <div className="lg:col-span-5">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="
-                    group flex flex-col gap-3 rounded-xl border border-white/10
-                    bg-gradient-to-b from-white/[0.045] to-white/[0.012] p-5
-                    transition-all duration-300
-                    hover:-translate-y-1 hover:border-brand/35
-                    hover:shadow-[0_24px_50px_-38px_hsl(var(--brand)/0.6)]
-                  "
-                >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-brand/20 bg-brand/10 transition-colors group-hover:border-brand/40">
-                    <CheckCircle2 className="w-5 h-5 text-brand-bright" />
-                  </div>
-                  <span className="text-sm font-semibold leading-snug text-foreground">
-                    {feature}
-                  </span>
+          <p className="mt-7 max-w-3xl text-base leading-relaxed text-slate-400 sm:text-lg">
+            MySocLabs is dedicated to safeguarding your data in an ever-evolving digital world.
+            Our mission is to preserve your digital way of life by countering cyber threats with
+            innovative solutions and expert knowledge.
+          </p>
+
+          <p className="mt-6 max-w-3xl border-l-2 border-brand/70 pl-5 text-base font-medium leading-relaxed text-slate-200 sm:text-lg">
+            We excel in providing a differentiated approach to cybersecurity operations.
+          </p>
+        </div>
+
+        {/* Divider between introduction and information panels */}
+        <div className="mt-12 h-px w-full bg-gradient-to-r from-white/[0.12] via-white/[0.06] to-transparent lg:mt-14" />
+
+        {/* BOTTOM: FOUR INFORMATION PANELS */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {features.map(({ title }) => (
+            <div
+              key={title}
+              className="group border-r-2 border-white/[0.03] last:border-0 pb-8 last:p-0 hover:text-brand-bright transition-colors duration-300"
+            >
+              <div className="flex flex-col pt-6">
+                <span
+                  className="flex-shrink-0 w-px bg-brand-bright transition-all duration-300 group-hover:scale-110"
+                />
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-xl font-bold text-white leading-relaxed mb-2 tracking-tight">
+                    {title}
+                  </h3>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-
+          ))}
         </div>
       </div>
     </section>

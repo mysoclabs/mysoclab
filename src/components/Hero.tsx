@@ -36,10 +36,6 @@ export const Hero = () => {
         {/* Technical grid, faded toward the edges */}
         <div className="absolute inset-0 grid-veil opacity-70" />
 
-        {/* Shield-red ambient light */}
-        <div className="absolute -top-1/3 right-[-10%] h-[820px] w-[820px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.20),transparent_65%)] blur-2xl" />
-        <div className="absolute bottom-[-30%] left-[-15%] h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,hsl(var(--brand)/0.10),transparent_68%)] blur-2xl" />
-
         {/* Vignette to keep content legible */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,#08080A_92%)]" />
 
@@ -60,7 +56,7 @@ export const Hero = () => {
               }}
             >
               <span className="h-px w-10 bg-gradient-to-r from-brand/10 to-brand" />
-              <span className="h-1.5 w-1.5 rounded-full bg-brand shadow-[0_0_12px_hsl(var(--brand)/0.9)]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-brand" />
             </div>
 
             {/* Headline */}
@@ -104,7 +100,7 @@ export const Hero = () => {
               <Link to="/contact" className="w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto h-14 px-8 text-base font-semibold rounded-xl bg-gradient-to-b from-brand-bright to-brand text-white shadow-[0_18px_40px_-18px_hsl(var(--brand)/0.9)] hover:brightness-110 hover:shadow-[0_22px_50px_-18px_hsl(var(--brand)/1)] transition-all duration-300 group border border-white/10"
+                  className="w-full sm:w-auto h-14 px-8 text-base font-semibold rounded-xl bg-gradient-to-b from-brand-bright to-brand text-white shadow-[0_18px_40px_-18px_rgba(0,0,0,0.9)] hover:brightness-110 hover:shadow-[0_22px_50px_-18px_rgba(0,0,0,0.95)] transition-all duration-300 group border border-white/10"
                 >
                   Get Protected
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
