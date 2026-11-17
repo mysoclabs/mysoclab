@@ -1,5 +1,5 @@
 /**
- * The public website uses the Red Eagle footer design.
- * Re-exporting keeps a single implementation so the design cannot drift.
+ * Common footer used across all public website pages.
+ * Uses the RedFooter design consistently.
  */
 export { RedFooter as Footer } from "./RedFooter";

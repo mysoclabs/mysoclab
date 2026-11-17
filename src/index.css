@@ -53,6 +53,11 @@
     --brand-soft: 357 100% 74%;
     --brand-deep: 357 70% 28%;
 
+    /* Strategic gray shades for cybersecurity readability */
+    --paragraph: 0 0% 88%;
+    --secondary-text: 0 0% 72%;
+    --muted-subtle: 0 0% 58%;
+
     /* Surfaces */
     --surface: 0 0% 7%;
     --surface-raised: 0 0% 10%;
@@ -86,6 +91,23 @@
     --eagle-cream: 30 20% 90%;
     --eagle-text-bright: 0 0% 98%;
     --eagle-text-muted: 0 0% 70%;
+  }
+
+  /* Red Eagle logo float animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .logo-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .logo-float {
+      animation: none;
+    }
   }
 
   .dark {
@@ -164,8 +186,13 @@
   }
 
   ::selection {
-    background: hsl(var(--brand) / 0.9);
-    color: hsl(0 0% 100%);
+    background: #3A3D42;
+    color: #FFFFFF;
+  }
+
+  ::-moz-selection {
+    background: #3A3D42;
+    color: #FFFFFF;
   }
 
   :focus-visible {
@@ -173,29 +200,22 @@
     outline-offset: 2px;
   }
 
-  /* Slim brand scrollbar */
+  /* Hide scrollbars globally while keeping scrolling functional */
+  html,
+  body,
+  #root,
   * {
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--brand) / 0.55) transparent;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* legacy Edge / IE */
   }
 
-  ::-webkit-scrollbar {
-    width: 10px;
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  #root::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Edge, Safari */
+    width: 0;
     height: 0;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: hsl(0 0% 5%);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--brand) / 0.5);
-    border-radius: 9999px;
-    border: 2px solid hsl(0 0% 5%);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--brand) / 0.75);
   }
 
   html.services-hide-scrollbar {
@@ -433,20 +453,283 @@
 }
 
 /* ==========================================================================
+   Public website — enterprise design system
+   Deliberately restrained: solid surfaces, hairline rules, real photography
+   and a tight type scale. No glows, no radial gradients, no glass panels.
+   ========================================================================== */
+
+@layer components {
+  /* ---- Layout ---------------------------------------------------------- */
+
+  .site-container {
+    width: 100%;
+    max-width: 82rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .site-container {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-container {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Vertical rhythm for full-width sections */
+  .site-section {
+    padding-block: 5rem;
+  }
+
+  @media (min-width: 768px) {
+    .site-section {
+      padding-block: 6rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-section {
+      padding-block: 7rem;
+    }
+  }
+
+  /* ---- Typography ------------------------------------------------------ */
+
+  .site-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+      "Liberation Mono", monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .site-eyebrow::before {
+    content: "";
+    width: 0.375rem;
+    height: 0.375rem;
+    flex-shrink: 0;
+    border-radius: 1px;
+    background: hsl(var(--brand));
+  }
+
+  .site-h1 {
+    font-size: clamp(2.4rem, 4.5vw, 3.9rem);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.032em;
+    color: hsl(0 0% 100%);
+  }
+
+  .site-h2 {
+    font-size: clamp(1.8rem, 2.8vw, 2.55rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.028em;
+    color: hsl(0 0% 100%);
+  }
+
+  .site-h3 {
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: hsl(0 0% 98%);
+  }
+
+  .site-lead {
+    font-size: clamp(1.0625rem, 1.1vw, 1.1875rem);
+    line-height: 1.65;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .site-body {
+    font-size: 0.9375rem;
+    line-height: 1.72;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .site-label {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+      "Liberation Mono", monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: hsl(0 0% 55%);
+  }
+
+  /* ---- Surfaces -------------------------------------------------------- */
+
+  .site-hairline {
+    height: 1px;
+    width: 100%;
+    background: hsl(0 0% 100% / 0.09);
+  }
+
+  .site-panel {
+    background: #0b0c0f;
+    border: 1px solid hsl(0 0% 100% / 0.08);
+  }
+
+  .site-panel-muted {
+    background: #0d0e12;
+    border: 1px solid hsl(0 0% 100% / 0.06);
+  }
+
+  /* Photography: gently unified grade so mixed sources read as one set */
+  .site-photo {
+    filter: saturate(0.88) contrast(1.03);
+  }
+
+  /* Quiet link with a trailing rule that extends on hover */
+  .site-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: hsl(0 0% 96%);
+    transition: color 0.2s ease;
+  }
+
+  .site-link:hover {
+    color: hsl(var(--brand-bright));
+  }
+
+  /* Small caps list item used in capability lists */
+  .site-capability {
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .site-capability::before {
+    content: "";
+    width: 0.3125rem;
+    height: 1px;
+    flex-shrink: 0;
+    transform: translateY(-0.28em);
+    background: hsl(var(--brand) / 0.9);
+  }
+}
+
+/* ==========================================================================
    Scroll Reveal System
    Implements a smooth, slow-motion slide-up fade-in transition on scroll
    ========================================================================== */
 section, footer, .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform, opacity;
+  transform: translateY(14px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 section.is-visible, footer.is-visible, .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* The homepage hero runs its own staggered entrance, so it opts out of the
+   section-level reveal (which would otherwise fade the whole band at once). */
+section#home {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   Hero entrance
+   One-shot, left-to-right slide + fade. Runs on mount only — no iteration.
+   ========================================================================== */
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-28px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-enter {
+  animation: hero-enter 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter-1 {
+  animation-delay: 0.1s;
+}
+
+.hero-enter-2 {
+  animation-delay: 0.28s;
+}
+
+.hero-enter-3 {
+  animation-delay: 0.46s;
+}
+
+.hero-enter-4 {
+  animation-delay: 0.62s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Comprehensive security solutions
+   Viewport-triggered entrance: the left column slides in from the left, then
+   the three practice panels follow in sequence. Runs once per page load.
+   ========================================================================== */
+section.solutions-section {
+  opacity: 1;
+  transform: none;
+}
+
+.solutions-reveal {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.solutions-reveal-left {
+  transform: translate3d(-30px, 0, 0);
+}
+
+.solutions-reveal-panel {
+  transform: translate3d(20px, 0, 0);
+}
+
+.solutions-reveal.is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solutions-reveal,
+  .solutions-reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -471,70 +754,59 @@ section.is-visible, footer.is-visible, .reveal-on-scroll.is-visible {
 }
 
 /* ==========================================================================
-   "Why Choose MySocLabs" card marquee
-   Scoped strictly to the WhyChooseUs section. The marquee lives inside the
-   section's centered container, so the track is clipped within that limited
-   width and never spills into the page margins. Four duplicated tracks scroll
-   right-to-left at a slow constant speed and loop seamlessly (one track
-   width = 25% of the total track, so the loop point is invisible).
+   "Why Choose MySOC Labs" rail
+   Native scroll-snap rail. The browser owns touch, trackpad and keyboard
+   scrolling; the arrow buttons only call scrollBy. Slides are sized so a
+   sliver of the next card is always visible — that peek is what signals
+   there is more content, so no auto-scrolling is needed.
    ========================================================================== */
 
-.why-choose-marquee {
-  overflow: hidden;
-  /* Soft fade at both container edges so cards never appear hard-clipped */
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0,
-    #000 4rem,
-    #000 calc(100% - 4rem),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0,
-    #000 4rem,
-    #000 calc(100% - 4rem),
-    transparent 100%
-  );
-}
-
-.why-choose-track {
+.why-track {
   display: flex;
-  width: max-content;
-  animation: why-choose-scroll 60s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
+  column-gap: 1.25rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0;
+  overscroll-behavior-x: contain;
+  /* The arrows and swipe are the affordances; the bar itself is noise. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.why-choose-marquee:hover .why-choose-track,
-.why-choose-marquee:focus-within .why-choose-track,
-.why-choose-marquee:active .why-choose-track {
-  animation-play-state: paused;
+.why-track::-webkit-scrollbar {
+  display: none;
 }
 
-@keyframes why-choose-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
+.why-track:focus-visible {
+  outline: 2px solid hsl(var(--brand-bright) / 0.8);
+  outline-offset: 8px;
+  border-radius: 0.75rem;
+}
+
+.why-slide {
+  flex: 0 0 86%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+@media (min-width: 640px) {
+  /* Two per view, with a peek of the third. */
+  .why-slide {
+    flex-basis: calc((100% - 1.25rem - 1.5rem) / 2);
   }
-  to {
-    transform: translate3d(-25%, 0, 0);
+}
+
+@media (min-width: 1024px) {
+  /* Three per view, with a peek of the fourth. */
+  .why-slide {
+    flex-basis: calc((100% - 2.5rem - 2.5rem) / 3);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .why-choose-marquee {
-    overflow-x: auto;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .why-choose-track {
-    animation: none !important;
-    transform: none !important;
-  }
-
-  .why-choose-clone {
-    display: none !important;
+  .why-track {
+    scroll-behavior: auto;
   }
 }
 
@@ -559,61 +831,4 @@ section.is-visible, footer.is-visible, .reveal-on-scroll.is-visible {
   }
 }
 
-/* ==========================================================================
-   Travelling signal dot on the "Our Approach" timeline
-   A single small brand-red dot flows along the connector (horizontally on
-   desktop/tablet, vertically on the stacked mobile timeline). It fades in at
-   the first stage and out at the last, so the loop restart is never a jump.
-   ========================================================================== */
 
-.approach-dot {
-  will-change: left, top, opacity;
-}
-
-.approach-dot-x {
-  animation: approach-dot-travel-x 12s linear infinite;
-}
-
-.approach-dot-y {
-  animation: approach-dot-travel-y 12s linear infinite;
-}
-
-@keyframes approach-dot-travel-x {
-  0% {
-    left: 0%;
-    opacity: 0;
-  }
-  4% {
-    opacity: 1;
-  }
-  94% {
-    opacity: 1;
-  }
-  100% {
-    left: 100%;
-    opacity: 0;
-  }
-}
-
-@keyframes approach-dot-travel-y {
-  0% {
-    top: 0%;
-    opacity: 0;
-  }
-  4% {
-    opacity: 1;
-  }
-  94% {
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .approach-dot {
-    display: none !important;
-  }
-}

@@ -1,6 +1,6 @@
 export const RedFooter = () => {
   return (
-    <footer className="py-10 bg-black border-t border-red-500/20">
+    <footer className="py-10 bg-[#06080D] border-t border-[#25272B]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
 

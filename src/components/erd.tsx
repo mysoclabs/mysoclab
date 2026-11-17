@@ -1,100 +1,80 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import logo from "@/assets/logom.png";
 
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
+import redEagleLogo from "@/assets/red-eagle-logo.png";
+import { redEagle } from "@/components/site/content";
+
+/**
+ * Red Eagle platform band. Kept as a homepage entry point to the standalone
+ * Red Eagle pages, which remain untouched.
+ */
 export const ERD = () => {
   return (
-    <section className="relative overflow-hidden py-24">
-      {/* ambient + grid */}
-      <div className="pointer-events-none absolute inset-0 grid-veil opacity-30" />
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-
-          {/* LEFT CONTENT */}
-          <div className="space-y-6 lg:pl-8 xl:pl-12">
-
-            {/* LOGO + NAME */}
-            <div className="flex items-center gap-3 group">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03]">
-                <img
-                  src={logo}
-                  alt="Red Eagle"
-                  className="h-10 w-10 transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <span
-                className="
-                  text-xl font-semibold
-                  text-white
-                  transition-colors duration-300
-                "
-              >
-                Red Eagle
-              </span>
+    <section className="border-b border-white/10 bg-[#15171B] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+      <div className="site-container site-section">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
+          {/* Copy */}
+          <div>
+            <div className="flex items-center gap-3">
+              <img
+                src={redEagleLogo}
+                alt=""
+                aria-hidden="true"
+                className="h-9 w-9 object-contain"
+              />
+              <span className="site-eyebrow">Platform</span>
             </div>
 
-            {/* HEADING */}
-            <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl">
-              Endpoint Detection <br />
-              <span className="text-brand-bright">
-                and Response Platform
+            <h2 className="site-h2 mt-5 text-balance">
+              <span className="text-brand-bright">Red Eagle</span>
+              <span className="mt-1 block text-[0.62em] font-medium leading-tight text-white">
+                Endpoint Detection and Response
               </span>
             </h2>
 
-            {/* SUB HEADING */}
-            <p className="max-w-xl text-xl text-muted-foreground">
-              An advanced endpoint detection and response platform built
-              to secure modern systems against sophisticated cyber attacks.
+            <p className="site-lead mt-5 max-w-xl">
+              {redEagle.summary}
             </p>
 
-            {/* DESCRIPTION */}
-            <p className="max-w-lg text-base text-muted-foreground">
-              Red Eagle continuously monitors endpoint activity, detects
-              suspicious behavior in real time, and responds to threats
-              using AI-driven behavioral and forensic analysis.
+            <p className="site-body mt-4 max-w-xl">
+              {redEagle.description}
             </p>
 
-            {/* CTA */}
-            <div className="pt-4">
-              <Link to="/soc-ai-tool">
-                <Button
-                  variant="outline"
-                  className="
-                    rounded-xl border-brand/40 bg-brand/[0.06] text-brand-bright
-                    hover:border-brand/70 hover:bg-brand/10 hover:text-brand-soft
-                    transition-all duration-300
-                  "
-                >
-                  Explore More →
-                </Button>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link
+                to="/soc-ai-tool"
+                className="group inline-flex h-11 items-center justify-center gap-2 bg-white px-5 text-[13.5px] font-semibold text-[#08090B] transition-colors hover:bg-white/90"
+              >
+                Explore Red Eagle
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
+
+              <Link
+                to="/trial-signup"
+                className="inline-flex h-11 items-center justify-center border border-white/20 px-5 text-[13.5px] font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/[0.04]"
+              >
+                Request a trial
               </Link>
             </div>
           </div>
 
-          {/* RIGHT VISUAL CARD */}
-          <div className="relative flex justify-center">
-            <div
-              className="
-                relative flex h-[380px] w-[380px] max-w-full
-                items-center justify-center
-                overflow-hidden rounded-2xl border border-brand/25
-                bg-gradient-to-br from-brand/[0.10] via-white/[0.03] to-transparent
-                shadow-[0_40px_90px_-50px_rgba(0,0,0,0.9)]
-                transition-transform duration-500 ease-out
-                hover:-translate-y-3
-              "
-            >
-              {/* inner ring */}
-              <div className="pointer-events-none absolute inset-6 rounded-xl border border-white/[0.06]" />
+          {/* Red Eagle logo card */}
+          <div className="flex w-full items-center justify-center pt-6 lg:ml-4">
+            <div className="relative flex items-center justify-center rounded-md border border-red-500/20 bg-[#0C0E14] p-6 transition-colors duration-200">
               <img
-                src={logo}
-                alt="Red Eagle EDR"
-                className="relative z-10 w-52 opacity-90"
+                src={redEagleLogo}
+                alt="Red Eagle"
+                loading="lazy"
+                decoding="async"
+                className="h-64 w-64 object-contain logo-float"
+                style={{
+                  animation: "float 6s ease-in-out infinite",
+                  WebkitAnimation: "float 6s ease-in-out infinite",
+                }}
               />
             </div>
           </div>
-
         </div>
       </div>
     </section>

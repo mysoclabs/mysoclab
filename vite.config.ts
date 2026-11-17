@@ -6,8 +6,10 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
-    port: 8080,
+  host: "0.0.0.0",
+  port: 8091,
+  strictPort: true,
+    allowedHosts: [".trycloudflare.com", "localhost", "127.0.0.1"],
     proxy: {
       "/api": {
         target: "http://localhost:5050",
