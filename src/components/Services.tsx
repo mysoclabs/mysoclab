@@ -1,318 +1,390 @@
-import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ArrowRight, Award, Headphones, Zap } from "lucide-react";
+
 import {
-  Eye,
-  Cpu,
-  Zap,
-  Shield,
-  Network,
-  Cloud,
-  Bug,
-  Mail,
-  UserCheck,
-  ClipboardCheck,
-  Briefcase,
-  ChevronRight,
-} from "lucide-react";
+  categories,
+  servicesByCategory,
+  type ServiceCategory,
+} from "@/components/site/content";
 
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+/*
+ * Real photography already available in the project. Each service uses a
+ * distinct image so the detail panel changes meaningfully between services.
+ */
+import serviceSocImg from "@/assets/photos/service-soc.jpg";
+import serviceMdrImg from "@/assets/photos/solution-defensive.jpg";
+import serviceIrImg from "@/assets/photos/service-ir.jpg";
+import serviceVulnerabilityImg from "@/assets/photos/service-vulnerability.jpg";
+import serviceNetworkImg from "@/assets/photos/service-network.jpg";
+import serviceEmailCloudImg from "@/assets/photos/service-email-cloud.jpg";
+import serviceWebPentestImg from "@/assets/photos/offensive-web-application.jpg";
+import serviceNetworkPentestImg from "@/assets/photos/offensive-network.jpg";
+import servicePhishingImg from "@/assets/photos/offensive-phishing.jpg";
+import serviceMobilePentestImg from "@/assets/photos/offensive-mobile.jpg";
+import serviceApiSecurityImg from "@/assets/photos/offensive-api.jpg";
+import serviceCloudAssessmentImg from "@/assets/photos/offensive-cloud.jpg";
+import serviceVcisoImg from "@/assets/photos/solution-advisory.jpg";
+import serviceAwarenessImg from "@/assets/photos/service-awareness.jpg";
+import serviceComplianceImg from "@/assets/photos/service-compliance.jpg";
 
-import socImg from "@/assets/service-soc.jpg";
-import mdrImg from "@/assets/service-mdr.jpg";
-import irImg from "@/assets/service-ir.jpg";
-import vulnerImg from "@/assets/service-vulner.jpg";
-import networkSecImg from "@/assets/service-network-sec.jpg";
-import emailCloudImg from "@/assets/service-email-cloud.jpg";
-import webPentestingImg from "@/assets/service-web-pentesting.jpg";
-import networkPentestingImg from "@/assets/service-network-pentesting.jpg";
-import phishingImg from "@/assets/service-phishing.jpg";
-import vcisoImg from "@/assets/service-vciso.jpg";
-import complianceImg from "@/assets/service-compliance.jpg";
+/* Static credibility highlights shown beneath the service detail panels. */
+const serviceHighlights = [
+  {
+    title: "Proven Expertise",
+    description:
+      "Years of experience protecting organizations from sophisticated cyber threats.",
+    Icon: Award,
+  },
+  {
+    title: "Rapid Response",
+    description:
+      "Swift incident response with minimal downtime to keep your business running.",
+    Icon: Zap,
+  },
+  {
+    title: "24/7 Support",
+    description:
+      "Round-the-clock monitoring and support from our dedicated security team.",
+    Icon: Headphones,
+  },
+];
 
-/* -------------------- TYPES -------------------- */
+const practiceKeys: ServiceCategory[] = ["defense", "offense", "advisory"];
 
-type ServiceCategory = "defense" | "offense" | "advisory";
+const isPractice = (value: string): value is ServiceCategory =>
+  practiceKeys.includes(value as ServiceCategory);
 
-type Service = {
-  icon: any;
-  title: string;
-  desc: string;
-  image: string;
+const practiceIntro: Record<
+  ServiceCategory,
+  { tagline?: string; description: string }
+> = {
+  defense: {
+    description:
+      "Monitoring, detection and response across endpoints, networks and cloud environments.",
+  },
+  offense: {
+    tagline: "Find the Weaknesses Before They Become Real Threats.",
+    description:
+      "MySocLabs offers practical, intelligence-led security testing to uncover vulnerabilities across applications, networks, APIs, and cloud environments before attackers can exploit them.",
+  },
+  advisory: {
+    tagline: "Security Decisions Backed by Expertise.",
+    description:
+      "From strategic security leadership to employee awareness and compliance readiness, MySocLabs provides practical guidance that helps organizations build stronger, more accountable security programs.",
+  },
 };
 
-/* -------------------- DATA -------------------- */
+/* Images mapped to the exact service titles in the shared content file. */
+const serviceImages: Record<string, string> = {
+  "SOC – 24/7 Monitoring": serviceSocImg,
+  "Managed Detection & Response (MDR)": serviceMdrImg,
+  "Incident Response (IR)": serviceIrImg,
+  "Vulnerability Management": serviceVulnerabilityImg,
+  "Network Security": serviceNetworkImg,
+  "Email & Cloud Security": serviceEmailCloudImg,
+  "Web Application Pentesting": serviceWebPentestImg,
+  "Network Pentesting": serviceNetworkPentestImg,
+  "Phishing Simulation": servicePhishingImg,
+  "Mobile Application Pentesting": serviceMobilePentestImg,
+  "API Security Testing": serviceApiSecurityImg,
+  "Cloud Security Assessment": serviceCloudAssessmentImg,
+  "Virtual CISO (vCISO)": serviceVcisoImg,
+  "Security Awareness Training": serviceAwarenessImg,
+  "Compliance Support": serviceComplianceImg,
+};
 
-const defensiveServices: Service[] = [
-  {
-    icon: Eye,
-    title: "SOC – 24/7 Monitoring",
-    desc: "Continuous monitoring of logs, endpoints, and network traffic to detect and respond to threats in real time.",
-    image: socImg,
-  },
-  {
-    icon: Cpu,
-    title: "Managed Detection & Response (MDR)",
-    desc: "Advanced detection using EDR/XDR and behavioral analytics to identify sophisticated attacks.",
-    image: mdrImg,
-  },
-  {
-    icon: Zap,
-    title: "Incident Response (IR)",
-    desc: "Rapid containment, investigation, recovery, and post-incident analysis.",
-    image: irImg,
-  },
-  {
-    icon: Shield,
-    title: "Vulnerability Management",
-    desc: "Continuous discovery, assessment, and prioritization of vulnerabilities.",
-    image: vulnerImg,
-  },
-  {
-    icon: Network,
-    title: "Network Security",
-    desc: "Firewall protection, IDS/IPS, segmentation, and malicious traffic detection.",
-    image: networkSecImg,
-  },
-  {
-    icon: Cloud,
-    title: "Email & Cloud Security",
-    desc: "Protection against phishing, malware, and account compromise.",
-    image: emailCloudImg,
-  },
-];
+/* The short lead line supplied with each offensive and advisory service. */
+const serviceLeads: Record<string, string | undefined> = {
+  "Web Application Pentesting":
+    "Your applications deserve more than surface-level security.",
+  "Network Pentesting": "Know how far an attacker could get.",
+  "Phishing Simulation":
+    "The best way to prepare is to put awareness to the test.",
+  "Mobile Application Pentesting":
+    "Security should be built into every mobile experience.",
+  "API Security Testing": "Every connection deserves a closer look.",
+  "Cloud Security Assessment":
+    "Cloud flexibility shouldn’t come with unnecessary risk.",
+  "Virtual CISO (vCISO)":
+    "Strong security starts with the right direction.",
+  "Security Awareness Training":
+    "A security-aware team is a stronger first line of defense.",
+  "Compliance Support":
+    "Make compliance a structured process, not a last-minute challenge.",
+};
 
-const offensiveServices: Service[] = [
-  {
-    icon: Bug,
-    title: "Web Application Pentesting",
-    desc: "Identify OWASP Top 10 vulnerabilities, auth issues, and logic flaws.",
-    image: webPentestingImg,
-  },
-  {
-    icon: Network,
-    title: "Network Pentesting",
-    desc: "Simulated attacks to uncover misconfigurations and exposed services.",
-    image: networkPentestingImg,
-  },
-  {
-    icon: Mail,
-    title: "Phishing Simulation",
-    desc: "Controlled campaigns to test employee awareness and resilience.",
-    image: phishingImg,
-  },
-];
-
-const advisoryServices: Service[] = [
-  {
-    icon: Briefcase,
-    title: "Virtual CISO (vCISO)",
-    desc: "Strategic cybersecurity leadership without a full-time executive.",
-    image: vcisoImg,
-  },
-  {
-    icon: UserCheck,
-    title: "Security Awareness Training",
-    desc: "Role-based training to reduce human risk.",
-    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&auto=format&fit=crop",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Compliance Support",
-    desc: "ISO 27001, SOC 2, GDPR, HIPAA, PCI-DSS readiness.",
-    image: complianceImg,
-  },
-];
-
-/* -------------------- MAIN PAGE -------------------- */
+const getHashPractice = (hash: string): ServiceCategory => {
+  const value = hash.replace("#", "");
+  return isPractice(value) ? value : "defense";
+};
 
 export default function Services() {
-  const [activeCategory, setActiveCategory] = useState<ServiceCategory>("defense");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [activeCategory, setActiveCategory] = useState<ServiceCategory>(() =>
+    getHashPractice(window.location.hash)
+  );
   const [selectedServiceIndex, setSelectedServiceIndex] = useState(0);
-  const detailPaneRef = useRef<HTMLDivElement>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
 
-  // Get active services array
-  const activeServices =
-    activeCategory === "defense"
-      ? defensiveServices
-      : activeCategory === "offense"
-      ? offensiveServices
-      : advisoryServices;
+  /* Keep /services#defense, #offense and #advisory links working. */
+  useEffect(() => {
+    const hashCategory = getHashPractice(location.hash);
+    if (location.hash && isPractice(location.hash.replace("#", ""))) {
+      setActiveCategory(hashCategory);
+      setSelectedServiceIndex(0);
+    }
+  }, [location.hash]);
 
-  const currentService = activeServices[selectedServiceIndex] || activeServices[0];
+  const activeServices = servicesByCategory[activeCategory];
+  const currentService =
+    activeServices[selectedServiceIndex] ?? activeServices[0];
+  const activeCategoryLabel =
+    categories.find((category) => category.key === activeCategory)?.label ??
+    "Defensive Security";
+  const intro = practiceIntro[activeCategory];
+  const currentImage =
+    serviceImages[currentService.title] ?? currentService.image;
+  const currentLead = serviceLeads[currentService.title];
 
   const handleCategoryChange = (category: ServiceCategory) => {
     setActiveCategory(category);
     setSelectedServiceIndex(0);
+    navigate(
+      { hash: category },
+      { replace: true, preventScrollReset: true }
+    );
   };
 
   const handleServiceClick = (index: number) => {
     setSelectedServiceIndex(index);
-    if (window.innerWidth < 768) {
-      setTimeout(() => {
-        detailPaneRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (window.innerWidth < 1024) {
+      window.setTimeout(() => {
+        detailRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }, 50);
     }
   };
 
   return (
-    <section className="py-20 bg-[#0a0f1d] text-slate-100 font-sans relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
-
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        
-        {/* HEADER */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest block mb-3">
-            Our Services
-          </span>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-white">
-            Comprehensive Security Services
+    <section className="relative overflow-hidden bg-[#08090B] pb-16 pt-8 text-white lg:pb-20 lg:pt-10">
+      <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
+        {/* ---------- Page introduction ---------- */}
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:items-end lg:gap-16">
+          <h1 className="max-w-[920px] text-[clamp(2.5rem,4.6vw,4.5rem)] font-bold leading-[1.03] tracking-[-0.035em] text-white">
+            Security services
+            <br />
+            across three practices.
           </h1>
-          <p className="text-lg text-slate-400 font-light">
-            Protecting your digital future with defensive, offensive, and advisory solutions aligned to your business risk.
+          <p className="max-w-[420px] text-[15px] leading-[1.7] text-[#D6D6D6] lg:pb-1 lg:text-[17px]">
+            Defensive operations, offensive testing and advisory support aligned
+            to your business risk. Select a practice to see the services inside
+            it.
           </p>
         </div>
 
-        {/* TOP CATEGORY PILLS */}
-        <div className="flex justify-center gap-4 mb-16">
-          <button
-            onClick={() => handleCategoryChange("defense")}
-            className={`px-6 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 ${
-              activeCategory === "defense"
-                ? "bg-slate-800 border-slate-700 text-white"
-                : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60"
-            }`}
-          >
-            Defensive Security
-          </button>
-          <button
-            onClick={() => handleCategoryChange("offense")}
-            className={`px-6 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 ${
-              activeCategory === "offense"
-                ? "bg-slate-800 border-slate-700 text-white"
-                : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60"
-            }`}
-          >
-            Offensive Security
-          </button>
-          <button
-            onClick={() => handleCategoryChange("advisory")}
-            className={`px-6 py-3 rounded-xl text-sm font-semibold border transition-all duration-300 ${
-              activeCategory === "advisory"
-                ? "bg-slate-800 border-slate-700 text-white"
-                : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800/60"
-            }`}
-          >
-            Advisory & Compliance
-          </button>
+        {/* ---------- Practice tabs ---------- */}
+        <div
+          role="tablist"
+          aria-label="Security practices"
+          className="mt-20 flex flex-wrap items-center gap-x-8 gap-y-2 lg:mt-24 lg:gap-x-10"
+        >
+          {categories.map((category) => {
+            const isActive = category.key === activeCategory;
+
+            return (
+              <button
+                key={category.key}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => handleCategoryChange(category.key)}
+                className={`relative pb-3 text-[14px] font-semibold transition-colors sm:text-[15px] ${
+                  isActive ? "text-brand" : "text-[#C8C8C8] hover:text-white"
+                }`}
+              >
+                {category.label}
+                <span
+                  aria-hidden="true"
+                  className={`absolute inset-x-0 bottom-0 h-[2px] transition-opacity duration-200 ${
+                    isActive
+                      ? "bg-brand opacity-100"
+                      : "bg-transparent opacity-0"
+                  }`}
+                />
+              </button>
+            );
+          })}
         </div>
 
-        {/* MAIN SIDE-BY-SIDE INTERACTIVE LAYOUT */}
-        <div className="grid grid-cols-12 gap-8 items-start">
-          
-          {/* LEFT COLUMN: VERTICAL SERVICE TABS */}
-          <div className="col-span-12 md:col-span-5 lg:col-span-4 space-y-3">
-            {activeServices.map((service, index) => {
-              const Icon = service.icon;
-              const isSelected = selectedServiceIndex === index;
+        {/* ---------- Practice introduction ---------- */}
+        <div className="mt-10 min-h-[3.5rem] max-w-4xl lg:mt-14">
+          {intro.tagline ? (
+            <>
+              <p className="text-[16px] font-semibold leading-7 text-white sm:text-[17px]">
+                {intro.tagline}
+              </p>
+              <p className="mt-1.5 text-[14px] leading-7 text-[#D6D6D6] sm:text-[15px]">
+                {intro.description}
+              </p>
+            </>
+          ) : (
+            <p className="text-[15px] leading-7 text-[#D6D6D6] sm:text-[16px]">
+              {intro.description}
+            </p>
+          )}
+        </div>
 
-              return (
-                <button
-                  key={index}
-                  onClick={() => handleServiceClick(index)}
-                  className={`w-full flex items-center justify-between p-5 rounded-2xl text-left border transition-all duration-300 group ${
-                    isSelected
-                      ? "bg-slate-800/80 border-slate-700 text-white"
-                      : "bg-[#0b1121]/50 border-white/10 text-slate-300 hover:text-white hover:bg-slate-800/30 hover:border-white/20"
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center border transition-colors ${
+        {/* ---------- Services layout ---------- */}
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,440px)_minmax(0,1fr)] xl:gap-12">
+          {/* Vertical service navigation */}
+          <aside className="self-start overflow-hidden border border-white/[0.15] bg-[#0A0A0C]">
+            <div className="flex items-center justify-between gap-4 border-b border-white/[0.15] px-5 py-4">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C8C8C8]">
+                Service Areas
+              </span>
+              <span className="truncate text-[12px] text-[#C8C8C8]">
+                {activeCategoryLabel}
+              </span>
+            </div>
+
+            <div role="group" aria-label="Select a service">
+              {activeServices.map((service, index) => {
+                const isSelected = selectedServiceIndex === index;
+
+                return (
+                  <button
+                    key={service.title}
+                    type="button"
+                    onClick={() => handleServiceClick(index)}
+                    aria-current={isSelected ? "true" : undefined}
+                    className={`relative flex w-full items-start border-b border-white/[0.15] px-5 py-4 text-left transition-colors last:border-b-0 ${
+                      isSelected
+                        ? "bg-white/[0.045]"
+                        : "hover:bg-white/[0.025]"
+                    }`}
+                  >
+                    <span
+                      className={`min-w-0 flex-1 text-[14px] leading-6 sm:text-[15px] ${
                         isSelected
-                          ? "bg-slate-900 border-slate-800"
-                          : "bg-slate-950 border-white/10 group-hover:border-white/20"
+                          ? "font-semibold text-white"
+                          : "font-medium text-[#D6D6D6]"
                       }`}
                     >
-                      <Icon className={`w-5 h-5 ${isSelected ? "text-primary" : "text-slate-300"}`} />
-                    </div>
-                    <span className="font-semibold text-sm leading-tight max-w-[200px] sm:max-w-none">
                       {service.title}
                     </span>
-                  </div>
-                  <ChevronRight
-                    className={`w-5 h-5 transition-transform duration-300 ${
-                      isSelected
-                        ? "translate-x-1 text-white"
-                        : "text-slate-500 group-hover:translate-x-1 group-hover:text-slate-300"
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {/* RIGHT COLUMN: SERVICE DETAIL PANE */}
-          <Card 
-            ref={detailPaneRef}
-            className="scroll-mt-20 col-span-12 md:col-span-7 lg:col-span-8 bg-[#0b1121]/20 backdrop-blur-xl border-2 border-white/12 p-6 sm:p-8 rounded-3xl min-h-[380px] flex flex-col justify-between"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              
-              {/* DETAIL SUB-COLUMN A: ILLUSTRATIVE IMAGE */}
-              <div className="lg:col-span-4 col-span-12">
-                <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-lg aspect-video lg:aspect-square w-full max-w-[280px] lg:max-w-none mx-auto">
-                  <img
-                    src={currentService.image}
-                    alt={currentService.title}
-                    className="w-full h-full object-cover opacity-90 transition-transform duration-500 hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1d]/60 to-transparent pointer-events-none" />
-                </div>
-              </div>
-
-              {/* DETAIL SUB-COLUMN B: DETAILS INFO */}
-              <div className="lg:col-span-8 col-span-12 flex flex-col justify-center space-y-4">
-                <div>
-                  <span className="text-[11px] font-bold text-primary uppercase tracking-widest block mb-2">
-                    {activeCategory === "defense"
-                      ? "Defensive Security"
-                      : activeCategory === "offense"
-                      ? "Offensive Security"
-                      : "Advisory & Compliance"}
-                  </span>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-4 leading-tight tracking-tight">
-                    {currentService.title}
-                  </h3>
-                  
-                  <p className="text-slate-400 text-sm leading-relaxed font-light">
-                    {currentService.desc}
-                  </p>
-                </div>
-              </div>
-
+                    {isSelected ? (
+                      <span
+                        aria-hidden="true"
+                        className="absolute inset-y-0 left-0 w-[2px] bg-brand"
+                      />
+                    ) : null}
+                  </button>
+                );
+              })}
             </div>
 
-            {/* ACTION FOOTER */}
-            <div className="mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row gap-4 items-center justify-between">
-              <p className="text-sm text-slate-400 font-normal text-center sm:text-left">
-                Need more information or a customized solution? Let's talk.
+            <div className="border-t border-white/[0.15] p-5">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C8C8C8]">
+                Need guidance?
               </p>
-              <Link to="/contact" className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 h-12 rounded-xl transition-all">
-                  Contact Us
-                </Button>
+              <p className="mt-2 text-[13px] leading-6 text-[#C8C8C8]">
+                Not sure which service fits your risk profile? Our team can help
+                you scope the right engagement.
+              </p>
+              <Link
+                to="/contact"
+                className="group mt-3 inline-flex items-center gap-2 text-[13px] font-semibold text-brand transition-colors hover:text-brand-bright"
+              >
+                Talk to an expert
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
+          </aside>
 
-          </Card>
+          {/* Selected service detail */}
+          <div
+            ref={detailRef}
+            className="scroll-mt-24 overflow-hidden border border-white/[0.15] bg-[#0A0A0C]"
+          >
+            <div className="relative h-[240px] w-full overflow-hidden bg-[#111] sm:h-[320px] lg:h-[360px] xl:h-[400px]">
+              <img
+                src={currentImage}
+                alt={currentService.title}
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
 
+            <div className="flex min-h-[300px] flex-col p-6 sm:p-8 lg:p-10">
+              <h2 className="text-[clamp(1.75rem,2.2vw,2.35rem)] font-bold leading-[1.15] tracking-[-0.025em] text-white">
+                {currentService.title}
+              </h2>
+
+              {currentLead ? (
+                <p className="mt-4 text-[16px] leading-7 text-[#DCDCDC] sm:text-[17px]">
+                  {currentLead}
+                </p>
+              ) : null}
+
+              <p className="mt-2 max-w-[74ch] text-[15px] leading-7 text-[#D6D6D6] sm:text-[16px] sm:leading-8">
+                {currentService.desc}
+              </p>
+
+              <div className="mt-auto pt-8">
+                <div className="border-t border-white/[0.15] pt-6">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-[13px] leading-6 text-[#C8C8C8] sm:text-[14px]">
+                      Need more information or a customized solution? Let's talk.
+                    </p>
+                    <Link
+                      to="/contact"
+                      className="group inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-[4px] bg-brand px-6 text-[13.5px] font-semibold text-white transition-colors hover:bg-brand-bright"
+                    >
+                      Contact Us
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
+        {/* ---------- Service highlights ---------- */}
+        <div className="mt-10 grid grid-cols-1 border-t border-white/[0.15] pt-10 sm:mt-12 sm:pt-12 lg:grid-cols-3 lg:gap-0">
+          {serviceHighlights.map((highlight, index) => (
+            <div
+              key={highlight.title}
+              className={`flex items-start gap-4 ${
+                index === 0
+                  ? "lg:pr-8"
+                  : "mt-8 border-t border-white/[0.15] pt-8 lg:mt-0 lg:border-t-0 lg:border-l lg:border-white/[0.15] lg:pl-8 lg:pt-0"
+              } ${
+                index > 0 && index < serviceHighlights.length - 1
+                  ? "lg:pr-8"
+                  : ""
+              }`}
+            >
+              <highlight.Icon
+                aria-hidden="true"
+                strokeWidth={1.75}
+                className="mt-0.5 h-6 w-6 shrink-0 text-white"
+              />
+              <div className="min-w-0">
+                <h3 className="text-[17px] font-semibold leading-6 text-white">
+                  {highlight.title}
+                </h3>
+                <p className="mt-2 max-w-[34ch] text-[14px] leading-6 text-[#C8C8C8]">
+                  {highlight.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

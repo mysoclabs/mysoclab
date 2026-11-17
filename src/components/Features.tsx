@@ -1,127 +1,81 @@
-import { ArrowRight, Eye, Bug, Briefcase } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
-/* -------------------- TYPES -------------------- */
+import { categories, servicesByCategory } from "@/components/site/content";
 
-type FeatureCategory = "defense" | "offense" | "advisory";
-
-/* -------------------- BORDER GLOW -------------------- */
-
-const borderGlow: Record<FeatureCategory, string> = {
-  defense:
-    "group-hover:shadow-[0_4px_20px_rgba(59,130,246,0.15)] group-hover:border-blue-500/40",
-  offense:
-    "group-hover:shadow-[0_4px_20px_rgba(239,68,68,0.15)] group-hover:border-red-500/40",
-  advisory:
-    "group-hover:shadow-[0_4px_20px_rgba(34,197,94,0.15)] group-hover:border-green-500/40",
-};
-
-/* -------------------- FEATURE DATA -------------------- */
-
-const features = [
-  {
-    icon: Eye,
-    title: "SOC – 24/7 Monitoring",
-    desc: "Continuous monitoring of logs, endpoints, and network traffic using SIEM & SOAR.",
-    category: "defense" as FeatureCategory,
-    link: "/services#defense",
-  },
-  {
-    icon: Bug,
-    title: "Web App Penetration Testing",
-    desc: "Identify OWASP Top 10 vulnerabilities and logic flaws.",
-    category: "offense" as FeatureCategory,
-    link: "/services#offense",
-  },
-  {
-    icon: Briefcase,
-    title: "Virtual CISO (vCISO)",
-    desc: "Strategic security leadership without full-time executive cost.",
-    category: "advisory" as FeatureCategory,
-    link: "/services#advisory",
-  },
-];
-
-/* -------------------- COMPONENT -------------------- */
-
+/**
+ * Three security practices. Editorial columns — square photography, hairline
+ * rules, no cards and no repeated shield illustration.
+ */
 export const Features = () => {
   return (
-    <section className="py-10 lg:py-20 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* HEADER */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Comprehensive{" "}
-            <span className="text-primary">Security Solutions</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Our cutting-edge technology and expert team provide multi-layered
-            protection for your digital assets.
+    <section className="border-b border-white/10 bg-[#111215] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+      <div className="site-container site-section">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <span className="site-eyebrow">What we do</span>
+            <h2 className="site-h2 mt-5 text-balance">
+              Three practices. One security posture.
+            </h2>
+          </div>
+          <p className="site-body max-w-md md:text-right">
+            Defensive operations, offensive testing and advisory work delivered
+            as separate engagements or as a single programme.
           </p>
         </div>
 
-        {/* FEATURE CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
+        <div className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8 lg:gap-10">
+          {categories.map((category, index) => {
+            const services = servicesByCategory[category.key];
 
             return (
-              <Link to={feature.link} key={index} className="block">
-                <div className="group relative rounded-xl transition-all duration-300">
-                  <div
-                    className={`
-                      rounded-xl bg-card/80 backdrop-blur-md
-                      p-6 h-full border border-border
-                      transition-all duration-300
-                      ${borderGlow[feature.category]}
-                    `}
-                  >
-                    {/* ICON */}
-                    <div className="mb-4">
-                      <div
-                        className="
-                          w-14 h-14 rounded-xl
-                          bg-black/70
-                          border border-cyan-400/30
-                          flex items-center justify-center
-                          transition-all duration-300
-                          group-hover:shadow-[0_0_12px_rgba(34,211,238,0.15)]
-                        "
-                      >
-                        <Icon className="w-7 h-7 text-cyan-400" />
-                      </div>
-                    </div>
-
-                    {/* TITLE */}
-                    <h3 className="text-xl font-semibold mb-3">
-                      {feature.title}
-                    </h3>
-
-                    {/* DESCRIPTION */}
-                    <p className="text-muted-foreground leading-relaxed">
-                      {feature.desc}
-                    </p>
-
-                    {/* CTA */}
-                    <div className="mt-4 flex items-center text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                      Learn more
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </div>
+              <article key={category.key} className="group flex flex-col">
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#0B0C0F]">
+                  <img
+                    src={category.image}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    className="site-photo h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#08090B]/55 to-transparent" />
+                  <span className="absolute left-4 top-4 font-mono text-[10px] tracking-[0.2em] text-white/70">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
-              </Link>
+
+<div className="flex flex-1 flex-col border-b border-white/10 pb-6 pt-5">
+  <h3 className="text-[21px] font-semibold tracking-tight text-white">
+    {category.label}
+  </h3>
+  <p className="mt-3 text-[15px] leading-relaxed text-white/55">
+    {category.summary}
+  </p>
+
+  <ul className="mt-6 space-y-2">
+    {services.slice(0, 3).map((service) => (
+      <li
+        key={service.title}
+        className="flex items-baseline gap-2 text-[14.5px] text-white/45"
+      >
+        <span className="h-px w-2.5 shrink-0 translate-y-[-0.25em] bg-white/25" />
+        {service.title}
+      </li>
+    ))}
+  </ul>
+
+                  <Link
+                    to={`/services#${category.anchor}`}
+                    className="group/link mt-6 inline-flex items-center gap-1.5 text-[13px] font-semibold text-white transition-colors hover:text-brand-bright"
+                  >
+                    View {services.length} services
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5" />
+                  </Link>
+                </div>
+              </article>
             );
           })}
-        </div>
-
-        {/* EXPLORE ALL CTA */}
-        <div className="mt-12 text-center">
-          <Link to="/services#all">
-            <button className="px-8 py-3 rounded-md border border-primary/40 hover:border-primary hover:bg-primary/10 transition-all">
-              Explore All Services →
-            </button>
-          </Link>
         </div>
       </div>
     </section>

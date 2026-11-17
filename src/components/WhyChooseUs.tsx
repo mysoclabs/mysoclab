@@ -1,55 +1,49 @@
-import { Award, Zap, HeadphonesIcon, TrendingUp } from "lucide-react";
+import { reasons } from "@/components/site/content";
 
-const reasons = [
-  {
-    icon: Award,
-    title: "Proven Expertise",
-    description: "Years of experience protecting organizations from sophisticated cyber threats.",
-  },
-  {
-    icon: Zap,
-    title: "Rapid Response",
-    description: "Swift incident response with minimal downtime to keep your business running.",
-  },
-  {
-    icon: HeadphonesIcon,
-    title: "24/7 Support",
-    description: "Round-the-clock monitoring and support from our dedicated security team.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Continuous Innovation",
-    description: "Always evolving with the latest security technologies and methodologies.",
-  },
-];
-
+/**
+ * Why MySOC Labs. A single editorial list on hairlines — the previous
+ * auto-scrolling card marquee is intentionally gone.
+ */
 export const WhyChooseUs = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-secondary/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Why Choose <span className="text-primary">MySocLabs</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We combine expertise, technology, and dedication to deliver unparalleled cybersecurity solutions
-          </p>
-        </div>
+    <section className="border-b border-white/10 bg-[#08090B]">
+      <div className="site-container site-section">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <span className="site-eyebrow">Why MySOC Labs</span>
+            <h2 className="site-h2 mt-5 text-balance">
+              Chosen for judgement, not just tooling.
+            </h2>
+            <p className="site-body mt-5 max-w-md">
+              We combine expertise, technology and a focus on the work that
+              actually reduces risk.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {reasons.map((reason, index) => (
-            <div
-              key={index}
-              className="text-center animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="inline-flex p-4 rounded-full bg-primary/10 mb-4">
-                <reason.icon className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">{reason.title}</h3>
-              <p className="text-muted-foreground">{reason.description}</p>
-            </div>
-          ))}
+          <ul className="border-t border-white/10">
+            {reasons.map((reason) => {
+              const Icon = reason.icon;
+
+              return (
+                <li
+                  key={reason.title}
+                  className="grid grid-cols-[2rem_minmax(0,1fr)] gap-x-4 gap-y-2 border-b border-white/10 py-6 sm:grid-cols-[2.5rem_minmax(0,15rem)_minmax(0,1fr)] sm:items-start sm:gap-x-6"
+                >
+                  <Icon
+                    className="mt-0.5 h-4 w-4 text-brand-bright/80"
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                  />
+                  <h3 className="text-[15px] font-semibold leading-snug text-white">
+                    {reason.title}
+                  </h3>
+                  <p className="col-start-2 text-[13.5px] leading-relaxed text-white/55 sm:col-start-3">
+                    {reason.description}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </section>

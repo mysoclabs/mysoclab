@@ -1,76 +1,77 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Quote, Shield, Target } from "lucide-react";
 
 export const CareersSection = () => {
   return (
-    <section className="py-24 relative overflow-hidden bg-gradient-to-b from-secondary/30 via-background to-background text-foreground border-y border-primary/5">
-      {/* Cybersecurity background grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.015] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* LEFT SIDE: Heading */}
-          <div className="lg:col-span-7 space-y-6">
-            <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
-              Work at the Heart of <br className="hidden sm:inline" />
-              <span className="text-primary">Digital Defense</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-              At MySocLabs, we are protecting the future by building advanced defenses against sophisticated cyber adversaries. We are looking for relentless minds to join our mission.
+    <section className="border-b border-white/10 bg-[#08090B] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+      <div className="site-container py-14 md:py-16">
+        <div className="mb-8">
+          <span className="site-eyebrow">Careers</span>
+          <h2 className="site-h2 mt-5 text-balance">
+            Work at the Heart of Digital Defense
+          </h2>
+        </div>
+
+        <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#111215] p-6 transition-colors duration-300 md:p-10">
+          <div className="absolute left-0 inset-0 w-2 bg-red-500" />
+
+          <div className="relative pl-8">
+            <Quote className="mb-5 h-9 w-9 text-red-500" />
+
+            <p className="mb-6 max-w-4xl text-base leading-8 text-white/60 md:text-lg">
+              At MySOC Labs, we help organizations stay ahead of evolving
+              cyber threats through proactive security operations, continuous
+              threat monitoring, and expert security guidance. Our approach
+              combines technology, intelligence, and human expertise to
+              identify risks, strengthen defenses, and build lasting cyber
+              resilience.
             </p>
-          </div>
 
-          {/* RIGHT SIDE: Visual Teaser / Big CTA Card */}
-          <div className="lg:col-span-5 lg:col-start-8 w-full max-w-[580px] mx-auto lg:ml-0 lg:-translate-x-36">
-            <div className="relative group">
-              
-              {/* Core CTA Box */}
-              <div className="relative bg-card/90 backdrop-blur-xl border border-[rgba(255,255,255,0.08)] rounded-2xl p-8 sm:p-10 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5),0_0_30px_rgba(59,130,246,0.035)] flex flex-col justify-between h-full">
-                <div className="space-y-6">
-                  <div className="text-center sm:text-left">
-                    <span className="text-sm font-semibold text-muted-foreground">Join MySocLabs</span>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold mt-1 mb-3">
-                      Start Your Journey
-                    </h3>
-                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                      Whether you are an experienced incident responder, a passionate red teamer, or a recent graduate with strong security foundations, we have a place for your expertise.
-                    </p>
-                  </div>
-                  
-                  {/* Small visual items */}
-                  <div className="space-y-3 pt-6">
-                    <div className="flex items-center justify-start gap-4 text-sm py-2 border-b border-border/40">
-                      <span className="font-medium w-28 flex-shrink-0">Locations</span>
-                      <span className="text-muted-foreground">Remote / Hybrid (India)</span>
-                    </div>
-                    <div className="flex items-center justify-start gap-4 text-sm py-2">
-                      <span className="font-medium w-28 flex-shrink-0">Work Model</span>
-                      <span className="text-muted-foreground">Flexible Hours</span>
-                    </div>
-                  </div>
+            <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1.2fr)] lg:gap-8">
+              <div className="flex items-start gap-4">
+                <Shield className="mt-1 h-6 w-6 shrink-0 text-red-500" />
+                <div>
+                  <h3 className="text-base font-semibold text-white">
+                    Make an Impact
+                  </h3>
+                  <p className="mt-2 text-sm leading-7 text-white/55">
+                    Contribute to protecting organizations against evolving
+                    cyber threats and real-world security challenges.
+                  </p>
                 </div>
+              </div>
 
-                <div className="mt-8">
-                  <Link to="/careers" className="block w-full">
-                    <Button
-                      size="lg"
-                      className="w-full bg-primary hover:bg-primary/95 text-primary-foreground font-bold hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
-                    >
-                      Explore Careers Page →
-                    </Button>
-                  </Link>
+              <div className="flex items-start gap-4">
+                <Target className="mt-1 h-6 w-6 shrink-0 text-red-500" />
+                <div>
+                  <h3 className="text-base font-semibold text-white">
+                    Grow Your Expertise
+                  </h3>
+                  <p className="mt-2 text-sm leading-7 text-white/55">
+                    Work with security professionals, explore emerging
+                    technologies, and continuously develop your skills.
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
 
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                to="/careers"
+                className="group inline-flex h-11 items-center justify-center gap-2 bg-brand px-6 text-[14px] font-semibold text-white transition-colors duration-200 hover:bg-brand-bright"
+              >
+                Explore Career Page
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
+
+              <Link
+                to="/soc-ai-tool"
+                className="inline-flex h-11 items-center justify-center rounded-lg border border-white/20 bg-white/[0.04] px-6 text-[14px] font-semibold text-white transition-colors duration-200 hover:border-white/35 hover:bg-white/[0.08]"
+              >
+                Soc AI Tool
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,46 +1,36 @@
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Shield } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
+/** Final call to action — plain band, no illustration or glow. */
 export const CTA = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
-      {/* Background Effects */}
+    <section className="bg-[#111215] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+      <div className="site-container site-section">
+        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <span className="site-eyebrow">Next step</span>
+          <h2 className="site-h2 mt-5 text-balance text-white">
+            Ready to Secure Your Business?
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#B8B8B8]">
+            Protect your organization with proactive cybersecurity strategies,
+            expert security guidance, and resilient defenses designed to keep
+            your business secure against evolving threats.
+          </p>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center bg-card/30 backdrop-blur-xl border border-primary/20 rounded-2xl p-8 md:p-12 animate-fade-in">
-
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-              Ready to <span className="text-primary">Secure Your Business?</span>
-            </h2>
-            
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join hundreds of organizations that trust MySocLabs to protect their digital assets. 
-              Let's discuss how we can safeguard your future.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button 
-                  size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground transition-all w-full sm:w-auto"
-                >
-                  Schedule Consultation
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              
-              <Link to="/services">
-                <Button 
-                  size="lg"
-                  variant="outline"
-                  className="border-primary/30 hover:bg-primary/10 hover:border-primary/50 w-full sm:w-auto"
-                >
-                  Explore Services
-                </Button>
-              </Link>
-            </div>
+          <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Link
+              to="/contact"
+              className="group inline-flex h-12 items-center justify-center gap-2 bg-brand px-6 text-[14px] font-semibold text-white transition-colors hover:bg-brand-bright"
+            >
+              Talk to our security experts
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </Link>
+            <Link
+              to="/services"
+              className="inline-flex h-12 items-center justify-center border border-white/20 px-6 text-[14px] font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/[0.04]"
+            >
+              Explore our services
+            </Link>
           </div>
         </div>
       </div>

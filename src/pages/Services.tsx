@@ -1,29 +1,28 @@
+import { useEffect } from "react";
+
 import { Navigation } from "@/components/Navigation";
 import Services from "@/components/Services";
 import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { PageCta } from "@/components/site/PageHeader";
 
 const ServicesPage = () => {
-  return (
-    <div className="min-h-screen bg-[#0a0f1d]">
-      <Navigation />
-      <div className="pt-16">
-        <Services />
-      </div>
+  // Hide the page scrollbar on this page only; scrolling stays fully functional.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add("services-hide-scrollbar");
+    return () => root.classList.remove("services-hide-scrollbar");
+  }, []);
 
-      <div className="pb-10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
-          <Link to="/contact">
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground transition-all"
-            >
-              Schedule a Consultation
-            </Button>
-          </Link>
-        </div>
-      </div>
+  return (
+    <div className="min-h-screen bg-[#08090B]">
+      <Navigation />
+      <main className="pt-16">
+        <Services />
+        <PageCta
+          title="Not sure where to start?"
+          description="Tell us about your environment and we will recommend the right practice and scope."
+        />
+      </main>
       <Footer />
     </div>
   );
