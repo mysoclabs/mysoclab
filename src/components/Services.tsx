@@ -12,21 +12,21 @@ import {
  * Real photography already available in the project. Each service uses a
  * distinct image so the detail panel changes meaningfully between services.
  */
-import serviceSocImg from "@/assets/photos/service-soc.jpg";
-import serviceMdrImg from "@/assets/photos/solution-defensive.jpg";
-import serviceIrImg from "@/assets/photos/service-ir.jpg";
-import serviceVulnerabilityImg from "@/assets/photos/service-vulnerability.jpg";
-import serviceNetworkImg from "@/assets/photos/service-network.jpg";
-import serviceEmailCloudImg from "@/assets/photos/service-email-cloud.jpg";
-import serviceWebPentestImg from "@/assets/photos/offensive-web-application.jpg";
-import serviceNetworkPentestImg from "@/assets/photos/offensive-network.jpg";
-import servicePhishingImg from "@/assets/photos/offensive-phishing.jpg";
-import serviceMobilePentestImg from "@/assets/photos/offensive-mobile.jpg";
-import serviceApiSecurityImg from "@/assets/photos/offensive-api.jpg";
-import serviceCloudAssessmentImg from "@/assets/photos/offensive-cloud.jpg";
-import serviceVcisoImg from "@/assets/photos/solution-advisory.jpg";
-import serviceAwarenessImg from "@/assets/photos/service-awareness.jpg";
-import serviceComplianceImg from "@/assets/photos/service-compliance.jpg";
+import serviceSocImg from "@/assets/service-icons/soc.jpeg";
+import serviceMdrImg from "@/assets/service-icons/mdr.PNG";
+import serviceIrImg from "@/assets/service-icons/incident-response.PNG";
+import serviceVulnerabilityImg from "@/assets/service-icons/vulnerability-management.jpeg";
+import serviceNetworkImg from "@/assets/service-icons/network-security.PNG";
+import serviceEmailCloudSecurityImg from "@/assets/service-icons/email-cloud-security.PNG";
+import serviceWebPentestImg from "@/assets/service-icons/web-application-pentesting.WEBP";
+import serviceNetworkPentestImg from "@/assets/service-icons/network-pentesting.PNG";
+import servicePhishingImg from "@/assets/service-icons/phishing-simulation.PNG";
+import serviceMobilePentestImg from "@/assets/service-icons/mobile-application-pentesting.PNG";
+import serviceApiSecurityImg from "@/assets/service-icons/api-security-testing.png";
+import serviceCloudAssessmentImg from "@/assets/service-icons/cloud-security-assessment.JPEG";
+import serviceVcisoImg from "@/assets/service-icons/vciso.JPEG";
+import serviceAwarenessImg from "@/assets/service-icons/security-awareness-training.JPEG";
+import serviceComplianceImg from "@/assets/service-icons/compliance-support.JPEG";
 
 /* Static credibility highlights shown beneath the service detail panels. */
 const serviceHighlights = [
@@ -82,7 +82,7 @@ const serviceImages: Record<string, string> = {
   "Incident Response (IR)": serviceIrImg,
   "Vulnerability Management": serviceVulnerabilityImg,
   "Network Security": serviceNetworkImg,
-  "Email & Cloud Security": serviceEmailCloudImg,
+  "Email & Cloud Security": serviceEmailCloudSecurityImg,
   "Web Application Pentesting": serviceWebPentestImg,
   "Network Pentesting": serviceNetworkPentestImg,
   "Phishing Simulation": servicePhishingImg,
