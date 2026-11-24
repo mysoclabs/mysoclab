@@ -17,24 +17,24 @@ import {
 
 /* ------------------------------ imagery ------------------------------ */
 
-import solutionDefensiveImg from "@/assets/photos/solution-defensive.jpg";
-import solutionOffensiveImg from "@/assets/photos/solution-offensive.jpg";
-import solutionAdvisoryImg from "@/assets/photos/solution-advisory.jpg";
+import solutionDefensiveImg from "@/assets/optimized/photos/solution-defensive.jpg";
+import solutionOffensiveImg from "@/assets/optimized/photos/solution-offensive.jpg";
+import solutionAdvisoryImg from "@/assets/optimized/photos/solution-advisory.jpg";
 import careersTeamImg from "@/assets/photos/careers-team.jpg";
 
-import serviceSocImg from "@/assets/photos/service-soc.jpg";
-import serviceMdrImg from "@/assets/photos/service-mdr.jpg";
-import serviceIrImg from "@/assets/photos/service-ir.jpg";
-import serviceVulnerabilityImg from "@/assets/photos/service-vulnerability.jpg";
-import serviceNetworkImg from "@/assets/photos/service-network.jpg";
-import serviceEmailCloudImg from "@/assets/photos/service-email-cloud.jpg";
-import serviceNetworkPentestImg from "@/assets/photos/service-network-pentest.jpg";
-import servicePhishingImg from "@/assets/photos/service-phishing.jpg";
-import serviceMobilePentestImg from "@/assets/photos/service-mobile-pentest.jpg";
-import serviceApiSecurityImg from "@/assets/photos/service-api-security.jpg";
-import serviceCloudAssessmentImg from "@/assets/photos/service-cloud-assessment.jpg";
-import serviceAwarenessImg from "@/assets/photos/service-awareness.jpg";
-import serviceComplianceImg from "@/assets/photos/service-compliance.jpg";
+import serviceSocImg from "@/assets/optimized/photos/service-soc.jpg";
+import serviceMdrImg from "@/assets/optimized/photos/service-mdr.jpg";
+import serviceIrImg from "@/assets/optimized/photos/service-ir.jpg";
+import serviceVulnerabilityImg from "@/assets/optimized/photos/service-vulnerability.jpg";
+import serviceNetworkImg from "@/assets/optimized/photos/service-network.jpg";
+import serviceEmailCloudImg from "@/assets/optimized/photos/service-email-cloud.jpg";
+import serviceNetworkPentestImg from "@/assets/optimized/photos/service-network-pentest.jpg";
+import servicePhishingImg from "@/assets/optimized/photos/service-phishing.jpg";
+import serviceMobilePentestImg from "@/assets/optimized/photos/service-mobile-pentest.jpg";
+import serviceApiSecurityImg from "@/assets/optimized/photos/service-api-security.jpg";
+import serviceCloudAssessmentImg from "@/assets/optimized/photos/service-cloud-assessment.jpg";
+import serviceAwarenessImg from "@/assets/optimized/photos/service-awareness.jpg";
+import serviceComplianceImg from "@/assets/optimized/photos/service-compliance.jpg";
 
 /* ------------------------------- icons ------------------------------- */
 

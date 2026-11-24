@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-import heroImage from "@/assets/photos/hero-operations.jpg";
+import heroImage from "@/assets/optimized/photos/hero-operations.jpg";
 import { categories } from "@/components/site/content";
 
 export const Hero = () => {
@@ -14,6 +14,8 @@ export const Hero = () => {
           alt=""
           aria-hidden="true"
           className="h-full w-full object-cover object-center [filter:grayscale(1)_brightness(0.82)_contrast(1.06)]"
+          loading="eager"
+          fetchPriority="high"
           decoding="async"
         />
         {/* Readability scrims */}

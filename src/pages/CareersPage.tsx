@@ -9,12 +9,12 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
-import growTogetherImg from "@/assets/grow-together.png";
-import collaborativeCultureImg from "@/assets/collaborative-culture.png";
-import flexibleWorkImg from "@/assets/flexible-work.png";
-import mentorshipImg from "@/assets/mentorship.png";
-import innovationImg from "@/assets/innovation.png";
-import wellnessImg from "@/assets/wellness.png";
+import growTogetherImg from "@/assets/optimized/grow-together.png";
+import collaborativeCultureImg from "@/assets/optimized/collaborative-culture.png";
+import flexibleWorkImg from "@/assets/optimized/flexible-work.png";
+import mentorshipImg from "@/assets/optimized/mentorship.png";
+import innovationImg from "@/assets/optimized/innovation.png";
+import wellnessImg from "@/assets/optimized/wellness.png";
 
 // Job Interface
 interface Job {
@@ -199,6 +199,7 @@ export default function CareersPage() {
                       <img 
                         src={benefit.image} 
                         alt={benefit.title} 
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                       />
                     ) : (

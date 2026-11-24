@@ -12,21 +12,21 @@ import {
  * Real photography already available in the project. Each service uses a
  * distinct image so the detail panel changes meaningfully between services.
  */
-import serviceSocImg from "@/assets/service-icons/soc.jpeg";
-import serviceMdrImg from "@/assets/service-icons/mdr.PNG";
-import serviceIrImg from "@/assets/service-icons/incident-response.PNG";
-import serviceVulnerabilityImg from "@/assets/service-icons/vulnerability-management.jpeg";
-import serviceNetworkImg from "@/assets/service-icons/network-security.PNG";
-import serviceEmailCloudSecurityImg from "@/assets/service-icons/email-cloud-security.PNG";
-import serviceWebPentestImg from "@/assets/service-icons/web-application-pentesting.WEBP";
-import serviceNetworkPentestImg from "@/assets/service-icons/network-pentesting.PNG";
-import servicePhishingImg from "@/assets/service-icons/phishing-simulation.PNG";
-import serviceMobilePentestImg from "@/assets/service-icons/mobile-application-pentesting.PNG";
-import serviceApiSecurityImg from "@/assets/service-icons/api-security-testing.png";
-import serviceCloudAssessmentImg from "@/assets/service-icons/cloud-security-assessment.JPEG";
-import serviceVcisoImg from "@/assets/service-icons/vciso.JPEG";
-import serviceAwarenessImg from "@/assets/service-icons/security-awareness-training.JPEG";
-import serviceComplianceImg from "@/assets/service-icons/compliance-support.JPEG";
+import serviceSocImg from "@/assets/optimized/service-icons/soc.jpeg";
+import serviceMdrImg from "@/assets/optimized/service-icons/mdr.PNG";
+import serviceIrImg from "@/assets/optimized/service-icons/incident-response.PNG";
+import serviceVulnerabilityImg from "@/assets/optimized/service-icons/vulnerability-management.jpeg";
+import serviceNetworkImg from "@/assets/optimized/service-icons/network-security.PNG";
+import serviceEmailCloudSecurityImg from "@/assets/optimized/service-icons/email-cloud-security.PNG";
+import serviceWebPentestImg from "@/assets/optimized/service-icons/web-application-pentesting.WEBP";
+import serviceNetworkPentestImg from "@/assets/optimized/service-icons/network-pentesting.PNG";
+import servicePhishingImg from "@/assets/optimized/service-icons/phishing-simulation.jpeg";
+import serviceMobilePentestImg from "@/assets/optimized/service-icons/mobile-application-pentesting.PNG";
+import serviceApiSecurityImg from "@/assets/optimized/service-icons/api-security-testing.png";
+import serviceCloudAssessmentImg from "@/assets/optimized/service-icons/cloud-security-assessment.JPEG";
+import serviceVcisoImg from "@/assets/optimized/service-icons/vciso.JPEG";
+import serviceAwarenessImg from "@/assets/optimized/service-icons/security-awareness-training.JPEG";
+import serviceComplianceImg from "@/assets/optimized/service-icons/compliance-support.JPEG";
 
 /* Static credibility highlights shown beneath the service detail panels. */
 const serviceHighlights = [
@@ -148,6 +148,12 @@ export default function Services() {
   const currentImage =
     serviceImages[currentService.title] ?? currentService.image;
   const currentLead = serviceLeads[currentService.title];
+  const isUncroppedService = [
+    "Network Pentesting",
+    "Phishing Simulation",
+    "API Security Testing",
+    "Vulnerability Management",
+  ].includes(currentService.title);
 
   const handleCategoryChange = (category: ServiceCategory) => {
     setActiveCategory(category);
@@ -315,7 +321,12 @@ export default function Services() {
               <img
                 src={currentImage}
                 alt={currentService.title}
-                className="h-full w-full object-cover object-center"
+                decoding="async"
+                className={
+                  isUncroppedService
+                    ? "h-full w-full object-fill"
+                    : "h-full w-full object-cover object-center"
+                }
               />
             </div>
 

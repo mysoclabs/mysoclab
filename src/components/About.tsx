@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-import socImage from "@/assets/photos/solution-defensive.jpg";
+import socImage from "@/assets/optimized/photos/solution-defensive.jpg";
 
 /**
  * Existing MySocLabs positioning, preserved from the previous About page.
